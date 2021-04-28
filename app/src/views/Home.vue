@@ -1,6 +1,5 @@
 <template>
-  <div class="home">
-    <a-button type="primary">按钮</a-button>
+  <div id="main-container">
   </div>
 </template>
 
@@ -13,3 +12,13 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.animate03{
+	-webkit-transition-duration:0.3s;
+	-moz-transition-duration:0.3s;
+	-ms-transition-duration:0.3s;
+	transition-duration:0.3s;
+}
+</style>
+
