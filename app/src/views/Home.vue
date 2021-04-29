@@ -1,24 +1,35 @@
 <template>
-  <div id="main-container">
+  <div class="main-container">
+    <div
+      id="left"
+      style="width: 20%; background: red; height: 500px; float: left"
+    >
+      左边
+    </div>
+    <div
+      id="zhong"
+      style="width: 49.9%; background: yellow; height: 500px; float: left"
+    >
+      中间
+    </div>
+    <div
+      id="right"
+      style="width: 30%; background: green; height: 500px; float: left"
+    >
+      右边
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'Home',
-  components: {
-  },
+  name: "Home",
+  components: {},
 });
 </script>
 
-<style>
-.animate03{
-	-webkit-transition-duration:0.3s;
-	-moz-transition-duration:0.3s;
-	-ms-transition-duration:0.3s;
-	transition-duration:0.3s;
-}
+<style lang="scss">
 </style>
 
