@@ -99,7 +99,7 @@ export default defineComponent({
       text-align: end;
       .subtitle{
         font-weight: normal;
-        margin:-5px -8px;
+        margin:-5px;
         font-size: 12px;
         -webkit-transform: scale(0.80);
       }

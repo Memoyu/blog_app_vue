@@ -1,35 +1,59 @@
 <template>
   <div class="main-container">
-    <div
-      id="left"
-      style="width: 20%; background: red; height: 500px; float: left"
-    >
-      左边
-    </div>
-    <div
-      id="zhong"
-      style="width: 49.9%; background: yellow; height: 500px; float: left"
-    >
-      中间
-    </div>
-    <div
-      id="right"
-      style="width: 30%; background: green; height: 500px; float: left"
-    >
-      右边
-    </div>
+    <a-row type="flex" :gutter="30">
+      <!-- 左 -->
+      <a-col class="left">
+        <intro-card></intro-card>
+      </a-col>
+      <!-- 中 -->
+      <a-col class="middle">
+        <article-card></article-card>
+      </a-col>
+      <!-- 右 -->
+      <a-col class="right">
+        <category-card></category-card>
+        <tag-card></tag-card>
+        <info-card></info-card>
+      </a-col>
+    </a-row>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import introCard from "@/components/home/IntroCard.vue";
+import articleCard from "@/components/home/ArticleCard.vue";
+import infoCard from "@/components/home/InfoCard.vue";
+import categoryCard from "@/components/home/CategoryCard.vue";
+import tagCard from "@/components/home/TagCard.vue";
 
 export default defineComponent({
   name: "Home",
-  components: {},
+  components: {
+    introCard,
+    articleCard,
+    infoCard,
+    categoryCard,
+    tagCard,
+  },
 });
 </script>
 
 <style lang="scss">
+.ant-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+// .left {
+//   background: green;
+// }
+
+// .middle {
+//   background: yellow;
+// }
+
+// .right {
+//   background: blue;
+// }
 </style>
 

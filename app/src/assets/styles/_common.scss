@@ -1,0 +1,72 @@
+.main-container{
+	width: 100%;
+	height: 100%;
+	padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+.theme-color-red {
+	color: $primaryColor;
+}
+.card-border-radius{
+	border-radius: 0.4rem;
+}
+
+.btn-shadow {
+  box-shadow:4rpx 8rpx 12rpx #ccc;
+}
+.pull-right {
+	float:right;
+}
+.pull-left {
+	float:left;
+}
+.overflow-hide {
+	overflow:hidden;
+}
+.surplus {
+	color: black;
+}
+.surplus-border {
+	border-bottom: 1px solid black;
+}
+.orange {
+	color: orange;
+}
+.blue {
+	color: blue;
+}
+.col999 {
+	color: #999;
+}
+.text-grey {
+	color: $secondaryText;
+}
+.fs12 {
+	font-size:24rpx;
+}
+.fs14 {
+	font-size:28rpx;
+}
+.fs16 {
+	font-size:32rpx;
+}
+.fs18 {
+	font-size:36rpx;
+}
+.fs20 {
+	font-size:40rpx;
+}
+.fs21 {
+	font-size:42rpx;
+}
+.fs24 {
+	font-size:48rpx;
+}
+.fs32 {
+	font-size:64rpx;
+}
+.blog-icon {
+	width:50rpx;
+	height:50rpx;
+}

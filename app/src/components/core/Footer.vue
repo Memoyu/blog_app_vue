@@ -66,7 +66,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 footer {
-  padding:0 300px;
   // position: relative;
   background: #3d4852;
   .link {
