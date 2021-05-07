@@ -4,7 +4,7 @@
       <div class="menu">
         <div class="content-center">
           <div class="title-container content-center">
-            <img class="logo" src="@/assets/icons/logo.png" alt="" />
+            <img class="logo" src="@/assets/icons/logo.png" alt />
             <div class="title">
               <span>Memoyu</span>
               <span class="subtitle">知行合一</span>
@@ -97,11 +97,11 @@ export default defineComponent({
       flex-direction: column;
       font-weight: bold;
       text-align: end;
-      .subtitle{
+      .subtitle {
         font-weight: normal;
-        margin:-5px;
+        margin: -5px;
         font-size: 12px;
-        -webkit-transform: scale(0.80);
+        -webkit-transform: scale(0.8);
       }
     }
     a {

@@ -2,8 +2,9 @@
   <div id="app">
     <headernav></headernav>
     <section class="content">
-      <router-view class="warp animate" />
+      <router-view class="warp" />
       <cufooter></cufooter>
+      <a-back-top />
     </section>
   </div>
 </template>
