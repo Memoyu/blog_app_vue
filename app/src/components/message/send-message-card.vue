@@ -6,11 +6,11 @@
         <div class="imgbox x-c">
           <img src="https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png" />
         </div>
-        <div class="name fs16">蜻蜓点水</div>
+        <div class="name fs16">蜻蜓点水3333333333333333333</div>
       </div>
       <div class="input">
         <a-textarea placeholder="知行合一" :rows="4" />
-        <div class="footer pull-right">
+        <div class="footer y-end">
           <a-button type="primary" shape="round">发布</a-button>
         </div>
       </div>
@@ -38,6 +38,7 @@ export default defineComponent({
   .send-message-card-content {
     display: flex;
     .side {
+      margin-right: 10px;
       width: 90px;
       .imgbox {
         width: 100%;
@@ -51,7 +52,6 @@ export default defineComponent({
       }
       .name {
         word-break: break-all;
-        height: 100%;
         text-align: center;
         margin-top: 10px;
       }

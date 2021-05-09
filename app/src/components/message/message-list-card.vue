@@ -4,19 +4,18 @@
       <div class="imgbox x-c">
         <img src="https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png" />
       </div>
-      <div></div>
     </div>
 
     <div class="message-content-right">
       <div class="message">
         <div class="message-sponsor">
           <span class="message-user">留言人</span>
-          <span class="message-date">2021-05-09 23:30:22</span>
+          <span class="message-date">评论于 2021-05-09 23:30:22</span>
           <span class="message-floor pull-right">1楼</span>
         </div>
-        <div class="message-text">这是回复！！！！！！！！！</div>
-        <div class="message-footer pull-right">
-          <a-button type="link" size="large">回复</a-button>
+        <div class="message-detail">这是回复！！！！！！！！！</div>
+        <div class="message-footer y-end">
+          <a-button  type="primary" shape="round">回复</a-button>
         </div>
       </div>
       <div class="reply">
@@ -62,6 +61,7 @@ export default defineComponent({
     width: 100%;
     .message {
       .message-sponsor {
+        background: palevioletred;
         font-size: 15px;
         font-weight: bold;
         .message-user {
@@ -72,14 +72,16 @@ export default defineComponent({
         .message-floor {
         }
       }
-      .message-text {
-        margin: 15px;
+      .message-detail {
+        background: purple;
+        padding: 15px 25px;
       }
       .message-footer {
         margin-top: 5px;
       }
     }
     .reply {
+      margin-top: 10px;
       .reply-input {
         .ant-input {
           resize: none;
