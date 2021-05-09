@@ -1,24 +1,24 @@
 <template>
   <div id="app">
-    <headernav></headernav>
+    <core-header-nav></core-header-nav>
     <section class="content">
-      <router-view class="warp" />
-      <cufooter></cufooter>
+      <router-view class="warp animate" />
       <a-back-top />
+      <core-footer></core-footer>
     </section>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import headernav from "@/components/core/HeaderNav.vue";
-import cufooter from "@/components/core/Footer.vue";
+import CoreHeaderNav from "@/components/core/core-header-nav.vue";
+import CoreFooter from "@/components/core/core-footer.vue";
 
 export default defineComponent({
   name: "App",
   components: {
-    headernav,
-    cufooter,
+    CoreHeaderNav,
+    CoreFooter,
   },
   setup() {
     return {};
@@ -37,12 +37,10 @@ body {
   margin: 0;
   padding: 0;
 }
-.wrap {
+.warp {
   position: relative;
   flex: 1;
-  background: #fff;
   padding: 20px 30px;
-  box-sizing: border-box;
   .head {
     height: 60px;
     span {

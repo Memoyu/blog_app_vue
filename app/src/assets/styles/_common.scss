@@ -1,8 +1,12 @@
 .main-container {
 	margin: 0 auto;
-	max-width: 1344px;
+	max-width: 1440px;
 	padding-top: 2em;
 	padding-bottom: 2em;
+}
+
+.content {
+	margin: 0 100px;
 }
 
 .theme-color-red {
@@ -37,6 +41,10 @@
 	border-bottom: 1px solid black;
 }
 
+.none-border {
+	border: none !important;
+}
+
 .orange {
 	color: orange;
 }
@@ -54,35 +62,35 @@
 }
 
 .fs12 {
-	font-size: 24rpx;
+	font-size: 12px;
 }
 
 .fs14 {
-	font-size: 28rpx;
+	font-size: 14px;
 }
 
 .fs16 {
-	font-size: 32rpx;
+	font-size: 16px;
 }
 
 .fs18 {
-	font-size: 36rpx;
+	font-size: 18px;
 }
 
 .fs20 {
-	font-size: 40rpx;
+	font-size: 20px;
 }
 
 .fs21 {
-	font-size: 42rpx;
+	font-size: 21px;
 }
 
 .fs24 {
-	font-size: 48rpx;
+	font-size: 24px;
 }
 
 .fs32 {
-	font-size: 64rpx;
+	font-size: 32px;
 }
 
 .blog-icon {

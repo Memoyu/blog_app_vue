@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div v-for="a in articles" :key="a.id" class="articles-card">
-       这是博客 {{a}}*********
+  <div class="articles-comp">
+    <div v-for="a in articles" :key="a.id" class="articles-item">
+       这是文章 {{a}}*********
     </div>
   </div>
 </template>
@@ -19,7 +19,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.articles-card {
+.articles-comp{
+  padding: 10px;
+}
+.articles-item {
     background: cornsilk;
     text-align: center;
     height: 100px;

@@ -1,7 +1,9 @@
 <template>
-  <div class="tag-comp card-border-radius">
-    <div class="tag-title">标签</div>
-    <div v-for="a in tags" :key="a.id" class="tag-card">这是标签 {{ a }}</div>
+  <div class="category-comp card-border-radius">
+    <div class="category-title">分类</div>
+    <div v-for="a in categories" :key="a.id" class="category-item">
+      这是分类 {{ a }}
+    </div>
   </div>
 </template>
 
@@ -9,27 +11,27 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   props: {
-    tags: {
+    categories: {
       type: Array,
-      default: () => [10, 20, 30, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
+      default: () => [10, 20, 30, 50, 60, 70, 80, 90, 100],
     },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.tag-comp {
+.category-comp {
   background: #fff;
   padding: 10px 0 10px 0;
-  margin-bottom: 20px;
-  .tag-title {
+  margin-bottom: 20px ;
+  .category-title {
     text-align: center;
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  .tag-card {
-      height: 40px;
+  .category-item {
+    height: 40px;
     text-align: center;
     margin: 9px;
     background: rgb(202, 187, 187);

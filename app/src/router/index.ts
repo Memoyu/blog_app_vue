@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
-import Category from '../views/Category.vue'
-import Tag from '../views/Tag.vue'
-import Friend from '../views/Friend.vue'
-import MessageBoard from '../views/MessageBoard.vue'
-import About from '../views/About.vue'
-import Test from '../views/Test.vue'
+import Home from '../views/home.vue'
+import Category from '../views/category.vue'
+import Tag from '../views/tag.vue'
+import Friend from '../views/friend.vue'
+import Message from '../views/message.vue'
+import About from '../views/about.vue'
+import Test from '../views/test.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,9 +29,9 @@ const routes: Array<RouteRecordRaw> = [
     component: Friend
   },
   {
-    path: '/messageboard',
-    name: 'MessageBoard',
-    component: MessageBoard
+    path: '/message',
+    name: 'Message',
+    component: Message
   },
   {
     path: '/about',

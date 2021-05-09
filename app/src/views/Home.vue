@@ -7,12 +7,12 @@
       </a-col>
       <!-- 中 -->
       <a-col class="middle" flex="auto">
-        <article-card></article-card>
+        <article-list-card></article-list-card>
       </a-col>
       <!-- 右 -->
       <a-col class="right" flex="300px">
-        <category-card></category-card>
-        <tag-card></tag-card>
+        <category-list-card></category-list-card>
+        <tag-list-card></tag-list-card>
         <info-card></info-card>
       </a-col>
     </a-row>
@@ -21,20 +21,20 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import introCard from "@/components/home/IntroCard.vue";
-import articleCard from "@/components/home/ArticleCard.vue";
-import infoCard from "@/components/home/InfoCard.vue";
-import categoryCard from "@/components/home/CategoryCard.vue";
-import tagCard from "@/components/home/TagCard.vue";
+import IntroCard from "@/components/home/intro-card.vue";
+import ArticleListCard from "@/components/home/article-list-card.vue";
+import InfoCard from "@/components/home/info-card.vue";
+import CategoryListCard from "@/components/home/category-list-card.vue";
+import TagListCard from "@/components/home/tag-list-card.vue";
 
 export default defineComponent({
   name: "Home",
   components: {
-    introCard,
-    articleCard,
-    infoCard,
-    categoryCard,
-    tagCard,
+    IntroCard,
+    ArticleListCard,
+    InfoCard,
+    CategoryListCard,
+    TagListCard,
   },
 });
 </script>

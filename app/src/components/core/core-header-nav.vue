@@ -15,9 +15,18 @@
             v-for="(item, index) in nav"
             :key="index"
             :class="{ active: $route.path == item.url }"
+            @click="goRouter(item.url)"
           >
-            <a @click="goRouter(item.url)">{{ item.name }}</a>
+            <a>{{ item.name }}</a>
           </li>
+        </div>
+        <div class="x-c">
+          <a-input-search
+            class="none-border"
+            placeholder="search"
+            style="width: 200px"
+            @search="onSearch"
+          />
         </div>
       </div>
     </div>
@@ -44,7 +53,7 @@ export default defineComponent({
       { name: "分类", url: "/category", icon: "logo-octocat" },
       { name: "标签", url: "/tag", icon: "logo-octocat" },
       { name: "友链", url: "/friend", icon: "logo-octocat" },
-      { name: "留言", url: "/messageboard", icon: "md-chatboxes" },
+      { name: "留言", url: "/message", icon: "md-chatboxes" },
       { name: "关于我", url: "/about", icon: "md-beer" },
     ];
     return { nav };
@@ -62,23 +71,21 @@ export default defineComponent({
 .header {
   display: flex;
   min-height: 70px;
-  background: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   color: #000;
   position: relative;
   width: 100%;
-  z-index: 10;
+  margin-top: 20px;
   .menu {
-    z-index: 20px;
+    background: #fff;
     position: relative;
-    width: 1000px;
+    width: 1300px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    //font-size: 15px;
     padding: 0 20px;
     .title-container {
-      min-width: 170px;
+      margin-right: 70px;
+      //min-width: 170px;
       .logo {
         width: 50px;
         height: 50px;
@@ -93,31 +100,32 @@ export default defineComponent({
       align-items: center;
     }
     .title {
+      font-size: 19px;
       display: flex;
       flex-direction: column;
       font-weight: bold;
       text-align: end;
       .subtitle {
         font-weight: normal;
-        margin: -5px;
+        margin: -4px;
         font-size: 12px;
-        -webkit-transform: scale(0.8);
       }
-    }
-    a {
-      color: #000;
     }
     li {
       list-style: none;
       padding: 1px 15px;
       margin: 0 7px;
       &.active {
-        background: rgba(0, 0, 0, 0.05);
+        background: rgba(0, 0, 0, 0.07);
         border-radius: 3px;
       }
       &:hover {
-        background: rgba(0, 0, 0, 0.05);
+        background: rgba(0, 0, 0, 0.07);
         border-radius: 3px;
+      }
+      a {
+        font-size: 16px;
+        color: #000;
       }
     }
   }

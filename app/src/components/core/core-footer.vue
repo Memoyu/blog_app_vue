@@ -81,7 +81,6 @@ footer {
     display: flex;
     flex-direction: column;
     line-height: 30px;
-    z-index: 20;
     position: relative;
     font-size: 14px;
     text-align: center;
