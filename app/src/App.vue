@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <core-header-nav></core-header-nav>
-    <section class="content">
+    <section class="section-content">
       <router-view class="warp animate" />
       <a-back-top />
       <core-footer></core-footer>
