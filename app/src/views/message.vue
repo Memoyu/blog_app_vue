@@ -23,7 +23,7 @@ export default defineComponent({
 
 <style lang="scss">
 .message-card {
-  margin-bottom: 30px;
+  margin-bottom: 200px;
 }
 </style>
 

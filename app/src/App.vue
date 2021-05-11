@@ -1,10 +1,21 @@
 <template>
   <div id="app">
-    <core-header-nav></core-header-nav>
+    <core-header-nav/>
     <section class="section-content">
       <router-view class="warp animate" />
       <a-back-top />
-      <core-footer></core-footer>
+      <core-footer/>
+      <a-drawer
+      title="Basic Drawer"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :visible="true"
+    >
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </a-drawer>
     </section>
   </div>
 </template>

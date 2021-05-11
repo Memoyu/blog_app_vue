@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="message-comp"
-    v-for="item in [1,2,3,4,5,6,7,8,9,10,11,]"
-    :key="item.id"
-  >
-    <message-list-item></message-list-item>
+  <div class="message-comp">
+    <div class="message-detail-item" v-for="item in [1,2,3,4,5,6,7,8,9,10,11,]" :key="item.id">
+      <message-list-item></message-list-item>
+    </div>
   </div>
 </template>
 
@@ -22,6 +20,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .message-comp {
-  margin-bottom: 20px;
+  .message-detail-item {
+    margin-bottom: 20px;
+  }
 }
 </style>

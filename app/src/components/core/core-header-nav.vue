@@ -3,7 +3,7 @@
     <div class="header">
       <div class="menu">
         <div class="content-center">
-          <div class="title-container content-center">
+          <div class="title-container content-center" @click="showAboutMe">
             <img class="logo" src="@/assets/icons/logo.png" alt />
             <div class="title">
               <span>Memoyu</span>
@@ -63,6 +63,9 @@ export default defineComponent({
       // 当有选择标签或者分类时点击博客自动选择
       this.$router.push({ path: item });
     },
+    showAboutMe() { 
+      console.log("shouwAboutMe")
+    }
   },
 });
 </script>
