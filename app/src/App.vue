@@ -1,27 +1,28 @@
 <template>
   <div id="app">
-    <core-header-nav/>
+    <core-header-nav />
     <section class="section-content">
       <router-view class="warp animate" />
       <a-back-top />
-      <core-footer/>
+      <core-footer />
       <a-drawer
-      title="Basic Drawer"
-      placement="right"
-      :mask="false"
-      :closable="false"
-      :visible="true"
-    >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-    </a-drawer>
+        title="Basic Drawer"
+        placement="right"
+        :mask="false"
+        :closable="false"
+        :visible="isShowAboutMe"
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </a-drawer>
     </section>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
+import { useStore } from "@/store";
 import CoreHeaderNav from "@/components/core/core-header-nav.vue";
 import CoreFooter from "@/components/core/core-footer.vue";
 
@@ -32,7 +33,13 @@ export default defineComponent({
     CoreFooter,
   },
   setup() {
-    return {};
+    const store = useStore();
+    const isShowAboutMe = computed(() => {
+      return store.state.app.showAboutMe;
+    });
+    return {
+      isShowAboutMe
+    };
   },
 });
 </script>

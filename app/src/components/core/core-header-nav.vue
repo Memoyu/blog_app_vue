@@ -3,7 +3,7 @@
     <div class="header">
       <div class="menu">
         <div class="content-center">
-          <div class="title-container content-center" @click="showAboutMe">
+          <div class="title-container content-center" @click="controlAboutMe">
             <img class="logo" src="@/assets/icons/logo.png" alt />
             <div class="title">
               <span>Memoyu</span>
@@ -34,7 +34,9 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { computed, reactive, toRefs, defineComponent } from "vue";
+import { useStore } from "@/store";
+import { AppActionTypes } from "@/store/modules/app/types";
 
 export default defineComponent({
   props: {
@@ -48,6 +50,7 @@ export default defineComponent({
     },
   },
   setup() {
+    const store = useStore();
     const nav = [
       { name: "首页", url: "/", icon: "ios-book" },
       { name: "分类", url: "/category", icon: "logo-octocat" },
@@ -56,16 +59,28 @@ export default defineComponent({
       { name: "留言", url: "/message", icon: "md-chatboxes" },
       { name: "关于我", url: "/about", icon: "md-beer" },
     ];
-    return { nav };
-  },
-  methods: {
-    goRouter(item) {
-      // 当有选择标签或者分类时点击博客自动选择
-      this.$router.push({ path: item });
-    },
-    showAboutMe() { 
-      console.log("shouwAboutMe")
-    }
+    const isShowAboutMe = computed(() => {
+      return store.state.app.showAboutMe;
+    });
+    const state = reactive({
+      goRouter(item) {
+        // 当有选择标签或者分类时点击博客自动选择
+        this.$router.push({ path: item });
+      },
+      controlAboutMe() {
+        console.log("controlAboutMe");
+        if (isShowAboutMe.value) {
+          store.dispatch(AppActionTypes.ACTION_HIDE_ABOUT_ME);
+        } else {
+          store.dispatch(AppActionTypes.ACTION_SHOW_ABOUT_ME);
+        }
+      },
+    });
+
+    return {
+      nav,
+      ...toRefs(state),
+    };
   },
 });
 </script>

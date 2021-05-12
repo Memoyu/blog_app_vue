@@ -4,6 +4,5 @@ export enum AppActionTypes {
 }
 
 export enum AppMutationTypes {
-    SHOW_ABOUT_ME = 'SHOW_ABOUT_ME',
-    HIDE_ABOUT_ME = 'HIDE_ABOUT_ME',
+    CONTROL_ABOUT_ME = 'CONTROL_ABOUT_ME',
 }
