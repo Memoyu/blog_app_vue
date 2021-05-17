@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <a-row type="flex" :gutter="30">
+    <a-row type="flex" :gutter="10">
       <!-- 左 -->
       <a-col class="left" flex="300px">
         <intro-card></intro-card>

@@ -57,7 +57,6 @@ export default defineComponent({
       { name: "标签", url: "/tag", icon: "logo-octocat" },
       { name: "友链", url: "/friend", icon: "logo-octocat" },
       { name: "留言", url: "/message", icon: "md-chatboxes" },
-      { name: "关于我", url: "/about", icon: "md-beer" },
     ];
     const isShowAboutMe = computed(() => {
       return store.state.app.showAboutMe;
