@@ -8,7 +8,6 @@ import 'ant-design-vue/dist/antd.css';
 import '@/assets/styles/_common.scss';
 import '@/assets/styles/_utils.scss';
 
-
 const app = createApp(App)
 app.use(Antd)
 app.use(store)

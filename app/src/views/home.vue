@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onUpdated } from "vue";
 import IntroCard from "@/components/home/intro-card.vue";
 import ArticleListCard from "@/components/home/article-list-card.vue";
 import InfoCard from "@/components/home/info-card.vue";
@@ -36,6 +36,9 @@ export default defineComponent({
     CategoryListCard,
     TagListCard,
   },
+  setup() {
+    console.log("home setup")
+  }
 });
 </script>
 

@@ -67,13 +67,15 @@ export default defineComponent({
         this.$router.push({ path: item });
       },
       controlAboutMe() {
-        console.log("controlAboutMe");
         if (isShowAboutMe.value) {
           store.dispatch(AppActionTypes.ACTION_HIDE_ABOUT_ME);
         } else {
           store.dispatch(AppActionTypes.ACTION_SHOW_ABOUT_ME);
         }
       },
+      onSearch() {
+        console.log("Search")
+      }
     });
 
     return {

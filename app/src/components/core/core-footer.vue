@@ -1,8 +1,8 @@
 <template>
   <footer>
     <div class="foot-text">
-      <a href="https://github.com/sweida" target="_blank" class="link">
-       <a-icon type="star" theme="filled" />
+      <a href="https://github.com/Memoyu" target="_blank" class="link">
+       <icon style="font-size:30px" icon="GithubOutlined" />
       </a>
       <span class="base">
         Prower By &nbsp;&nbsp;
@@ -30,8 +30,10 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { Icon } from "@/icon.ts";
 
 export default defineComponent({
+  components: { Icon },
   setup() {
     const longTime = ref();
     return {

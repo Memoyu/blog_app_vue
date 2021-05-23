@@ -5,40 +5,26 @@
       <router-view class="warp animate" />
       <a-back-top />
       <core-footer />
-      <a-drawer
-        title="Basic Drawer"
-        placement="right"
-        :mask="false"
-        :closable="false"
-        :visible="isShowAboutMe"
-      >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </a-drawer>
+      <core-about-me-drawer/>
     </section>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useStore } from "@/store";
+import { defineComponent } from "vue";
 import CoreHeaderNav from "@/components/core/core-header-nav.vue";
 import CoreFooter from "@/components/core/core-footer.vue";
+import CoreAboutMeDrawer from "@/components/core/core-about-me-drawer.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     CoreHeaderNav,
     CoreFooter,
+    CoreAboutMeDrawer
   },
   setup() {
-    const store = useStore();
-    const isShowAboutMe = computed(() => {
-      return store.state.app.showAboutMe;
-    });
     return {
-      isShowAboutMe
     };
   },
 });
