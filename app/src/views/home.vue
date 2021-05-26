@@ -2,15 +2,15 @@
   <div class="main-container">
     <a-row type="flex" :gutter="10">
       <!-- 左 -->
-      <a-col class="left" flex="300px">
+      <a-col class="left" flex="20%">
         <intro-card></intro-card>
       </a-col>
       <!-- 中 -->
-      <a-col class="middle" flex="auto">
+      <a-col class="middle" flex="60%">
         <article-list-card></article-list-card>
       </a-col>
       <!-- 右 -->
-      <a-col class="right" flex="300px">
+      <a-col class="right" flex="20%">
         <category-list-card></category-list-card>
         <tag-list-card></tag-list-card>
         <info-card></info-card>
