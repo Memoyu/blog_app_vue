@@ -1,15 +1,15 @@
 <template>
-  <div class="article-item">
+  <div class="article-item-comp">
     <div class="article-container">
       <div class="article-title fs20">
-        这是标题这是标题这是标题这是标题这是标题
+        <a class="link-none-line"> 这是标题这是标题这是标题这是标题这是标题 </a>
       </div>
       <div class="article-content">
         <div class="left">
           <div class="tags">
-            <a-tag color="blue"> blue </a-tag>
-            <a-tag color="blue"> blue </a-tag>
-            <a-tag color="blue"> blue </a-tag>
+            <a-tag color="blue"> C# </a-tag>
+            <a-tag color="blue"> .NET Core </a-tag>
+            <a-tag color="blue"> Vue </a-tag>
           </div>
           <div class="description fs16">
             OpenJ9介绍OpenJ9是一种高性能，可扩展的Java™虚拟机（VM）实现，完全符合Java虚拟机规范。在运行时，VM解释由Java编译器编译的Java字节码。VM充当语言与底层操作系统和硬件之间的翻译器。Java程序需要特定的VM才能在特定的平台（例如Linux®，z/OS®或Windows™
@@ -17,9 +17,11 @@
         </div>
         <div class="right">
           <div class="image">
-            <img
-              src="https://img-blog.csdnimg.cn/20200701115554772.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQwNzI4,size_16,color_FFFFFF,t_70"
-            />
+            <a class="link-none-line"> 
+              <img
+                src="https://img-blog.csdnimg.cn/20200701115554772.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQwNzI4,size_16,color_FFFFFF,t_70"
+              />
+            </a>
           </div>
         </div>
       </div>
@@ -47,7 +49,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Icon } from "@/icon.ts";
+import { Icon } from "@/icon";
 
 export default defineComponent({
   components: { Icon },
@@ -56,10 +58,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.article-item {
+.article-item-comp {
   background: white;
   padding: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   .article-container {
     text-align: center;
     height: 150px;

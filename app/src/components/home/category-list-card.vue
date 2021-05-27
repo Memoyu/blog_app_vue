@@ -1,19 +1,38 @@
 <template>
   <div class="category-comp card-border-radius">
     <div class="category-title">分类</div>
-    <div v-for="a in categories" :key="a.id" class="category-item">
-      这是分类 {{ a }}
-    </div>
+    <li v-for="category in categories" :key="category.id">
+      <category-list-item :category="category" />
+    </li>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import CategoryListItem from "./category-list-item.vue";
+interface Category {
+  name: string;
+  total: number;
+}
+
 export default defineComponent({
+  components: {
+    CategoryListItem,
+  },
   props: {
     categories: {
       type: Array,
-      default: () => [10, 20, 30, 50, 60, 70, 80, 90, 100],
+      default: () => [
+        { name: "随笔", total: 10 },
+        { name: ".NET Core", total: 20 },
+        { name: "C#", total: 30 },
+        { name: "阿里云", total: 50 },
+        { name: "任务调度", total: 60 },
+        { name: "Kafka", total: 70 },
+        { name: "Linux", total: 80 },
+        { name: "Docker", total: 90 },
+        { name: "微服务", total: 100 },
+      ],
     },
   },
 });
@@ -22,8 +41,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .category-comp {
   background: #fff;
-  padding: 10px 0 10px 0;
-  margin-bottom: 20px ;
+  padding: 25px;
+  margin-bottom: 20px;
   .category-title {
     text-align: center;
     font-weight: bold;
@@ -35,6 +54,13 @@ export default defineComponent({
     text-align: center;
     margin: 9px;
     background: rgb(202, 187, 187);
+  }
+  li {
+    list-style: none;
+    &:hover {
+      background: rgba(0, 0, 0, 0.07);
+      border-radius: 3px;
+    }
   }
 }
 </style>

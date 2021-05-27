@@ -30,7 +30,7 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import { Icon } from "@/icon.ts";
+import { Icon } from "@/icon";
 
 export default defineComponent({
   components: { Icon },

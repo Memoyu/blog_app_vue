@@ -1,17 +1,34 @@
 <template>
   <div class="tag-comp card-border-radius">
     <div class="tag-title">标签</div>
-    <div v-for="a in tags" :key="a.id" class="tag-item">这是标签 {{ a }}</div>
+    <div class="x-start tags-container">
+      <tag-list-item v-for="tag in tags" :key="tag.id" :tag="tag" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import TagListItem from "./tag-list-item.vue";
+
 export default defineComponent({
+  components: {
+    TagListItem,
+  },
   props: {
     tags: {
       type: Array,
-      default: () => [10, 20, 30, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
+      default: () => [
+        { name: "随笔", total: 10 },
+        { name: ".NET Core", total: 20 },
+        { name: "C#", total: 30 },
+        { name: "阿里云", total: 50 },
+        { name: "任务调度", total: 60 },
+        { name: "Kafka", total: 70 },
+        { name: "Linux", total: 80 },
+        { name: "Docker", total: 90 },
+        { name: "微服务", total: 100 },
+      ],
     },
   },
 });
@@ -20,7 +37,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .tag-comp {
   background: #fff;
-  padding: 10px 0 10px 0;
+  padding: 25px 15px;
   margin-bottom: 20px;
   .tag-title {
     text-align: center;
@@ -28,11 +45,8 @@ export default defineComponent({
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  .tag-item {
-      height: 40px;
-    text-align: center;
-    margin: 9px;
-    background: rgb(202, 187, 187);
+  .tags-container{
+    flex-wrap: wrap;
   }
 }
 </style>
