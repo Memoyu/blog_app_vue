@@ -23,7 +23,7 @@ export default defineComponent({
       },
     },
   },
-  setup(props, _) {
+  setup(props) {
     const dataMap = reactive({
       categoryInfo: props.category,
     });

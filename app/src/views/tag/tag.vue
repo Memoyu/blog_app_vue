@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import TagRowCard from "@/components/tag/tag-row-card.vue";
-import ArticleListCard from "@/components/home/article-list-card.vue";
+import ArticleListCard from "@/components/article/article-list-card.vue";
 
 export default defineComponent({
   name: "Tag",

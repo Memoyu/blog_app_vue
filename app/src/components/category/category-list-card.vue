@@ -8,12 +8,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 import CategoryListItem from "./category-list-item.vue";
-interface Category {
-  name: string;
-  total: number;
-}
 
 export default defineComponent({
   components: {

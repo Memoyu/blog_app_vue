@@ -20,12 +20,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onUpdated } from "vue";
+import { defineComponent } from "vue";
 import IntroCard from "@/components/home/intro-card.vue";
-import ArticleListCard from "@/components/home/article-list-card.vue";
+import ArticleListCard from "@/components/article/article-list-card.vue";
 import InfoCard from "@/components/home/info-card.vue";
-import CategoryListCard from "@/components/home/category-list-card.vue";
-import TagListCard from "@/components/home/tag-list-card.vue";
+import CategoryListCard from "@/components/category/category-list-card.vue";
+import TagListCard from "@/components/tag/tag-list-card.vue";
 
 export default defineComponent({
   name: "Home",
