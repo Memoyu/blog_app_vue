@@ -1,6 +1,5 @@
 <template>
   <div class="category-comp card-border-radius">
-    <div class="category-title">分类</div>
     <li v-for="category in categories" :key="category.id">
       <category-list-item :category="category" />
     </li>
@@ -39,12 +38,6 @@ export default defineComponent({
   background: #fff;
   padding: 25px;
   margin-bottom: 20px;
-  .category-title {
-    text-align: center;
-    font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
   .category-item {
     height: 40px;
     text-align: center;

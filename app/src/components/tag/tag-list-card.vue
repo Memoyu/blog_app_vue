@@ -1,14 +1,13 @@
 <template>
   <div class="tag-comp card-border-radius">
-    <div class="tag-title">标签</div>
     <div class="x-start tags-container">
-      <tag-list-item v-for="tag in tags" :key="tag.id" :tag="tag" />
+      <tag-list-item v-for="tag in tags" :key="tag.id" :tag="tag" :size="size"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, toRefs } from "vue";
 import TagListItem from "./tag-list-item.vue";
 
 export default defineComponent({
@@ -26,10 +25,21 @@ export default defineComponent({
         { name: "任务调度", total: 60 },
         { name: "Kafka", total: 70 },
         { name: "Linux", total: 80 },
+         { name: "Vue", total: 80 },
         { name: "Docker", total: 90 },
         { name: "微服务", total: 100 },
       ],
     },
+    size: {
+      type: String,
+      default: "small",
+    },
+  },
+  setup(props) {
+    const dataMap = reactive({
+      size: props.size,
+    });
+    return { ...toRefs(dataMap) };
   },
 });
 </script>
@@ -39,13 +49,7 @@ export default defineComponent({
   background: #fff;
   padding: 25px 15px;
   margin-bottom: 20px;
-  .tag-title {
-    text-align: center;
-    font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .tags-container{
+  .tags-container {
     flex-wrap: wrap;
   }
 }

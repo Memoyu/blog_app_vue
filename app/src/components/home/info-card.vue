@@ -1,6 +1,5 @@
 <template>
   <div class="info-comp card-border-radius">
-    <div class="info-title">本站信息</div>
     <div class="info-container">
       <div v-for="info in infos" :key="info.id" class="x-bc info-content">
         <span class="title">{{info.name}}:</span>
@@ -32,12 +31,6 @@ export default defineComponent({
 .info-comp {
   background: #fff;
   padding: 25px;
-  .info-title {
-    text-align: center;
-    font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
   .title {
     font-size: 14px;
   }

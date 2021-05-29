@@ -11,9 +11,16 @@
       </a-col>
       <!-- 右 -->
       <a-col class="right" flex="20%">
-        <category-list-card></category-list-card>
-        <tag-list-card></tag-list-card>
-        <info-card></info-card>
+        <div>
+          <div class="right-card-title">分类</div>
+          <category-list-card></category-list-card>
+        </div>
+        <div>
+          <div class="right-card-title">标签</div>
+          <tag-list-card></tag-list-card>
+        </div>
+        <div>    <div class="right-card-title">本站信息</div>
+        <info-card></info-card></div>
       </a-col>
     </a-row>
   </div>
@@ -37,8 +44,8 @@ export default defineComponent({
     TagListCard,
   },
   setup() {
-    console.log("home setup")
-  }
+    console.log("home setup");
+  },
 });
 </script>
 
@@ -46,6 +53,12 @@ export default defineComponent({
 .ant-row {
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+.right-card-title {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 // .left {
 //   background: green;
