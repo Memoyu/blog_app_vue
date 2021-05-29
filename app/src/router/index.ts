@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/home.vue'
-import Category from '../views/category.vue'
-import Tag from '../views/tag.vue'
-import Friend from '../views/friend.vue'
-import Message from '../views/message.vue'
-import About from '../views/about.vue'
+import Home from '../views/home/home.vue'
+import Category from '../views/category/category.vue'
+import Tag from '../views/tag/tag.vue'
+import Friend from '../views/friend/friend.vue'
+import Message from '../views/message/message.vue'
+import About from '../views/about/about.vue'
 import Test from '../views/test.vue'
 
 const routes: Array<RouteRecordRaw> = [
