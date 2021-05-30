@@ -20,7 +20,7 @@ export default defineComponent({
         { name: "分类总数", total: "20个" },
         { name: "标签总数", total: "30个" },
         { name: "留言总数", total: "50条" },
-        { name: "已运行：", total: "180天12时29分" },
+        { name: "已运行", total: "180天12时29分" },
       ],
     },
   },

@@ -24,10 +24,10 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const dataMap = reactive({
+    const state = reactive({
       categoryInfo: props.category,
     });
-    return { ...toRefs(dataMap) };
+    return { ...toRefs(state) };
   },
 });
 </script>

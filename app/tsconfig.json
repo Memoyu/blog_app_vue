@@ -27,6 +27,12 @@
       "@/assets/*": [
         "src/assets/*"
       ],
+      "@/model/*": [
+        "src/model/*"
+      ],
+      "@/utils/*": [
+        "src/utils/*"
+      ],
     },
     "lib": [
       "esnext",
