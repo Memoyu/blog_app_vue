@@ -14,10 +14,9 @@
           :style="'position: fixed; width:280px;'"
         >
           <div class="clearfix">
-            <span>目录</span>
+            <span class="catalog">目录</span>
           </div>
           <div id="navigation" class="wx_navigation" />
-          <a-anchor-link href="#点击无效果问题" title="Basic demo" />
         </a-card>
       </a-col>
     </a-row>
@@ -357,6 +356,10 @@ export default defineComponent({
   .clearfix {
     padding: 18px 20px;
     font-size: 17px;
+    .catalog {
+      font-size: 19px;
+      font-weight: bold;
+    }
   }
 }
 
