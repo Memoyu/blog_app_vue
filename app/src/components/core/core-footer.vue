@@ -1,9 +1,6 @@
 <template>
   <footer>
     <div class="foot-text">
-      <a href="https://github.com/Memoyu" target="_blank" class="link">
-       <icon style="font-size:30px" icon="GithubOutlined" />
-      </a>
       <span class="base">
         Prower By &nbsp;&nbsp;
         <a
@@ -18,11 +15,11 @@
         >
       </span>
       <span>
-        © {{ year }} &nbsp;&nbsp;Memoyu &nbsp;&nbsp;<a
-          target="_blank"
-          style="color: #fff"
-          >桂ICP备20005450号-1</a
-        >
+        © {{ year }} &nbsp;&nbsp;Memoyu 
+        <a href="https://github.com/Memoyu" target="_blank" class="link">
+          <icon class="icon" icon="GithubOutlined" />
+        </a>
+        <a target="_blank" style="color: #fff">桂ICP备20005450号-1</a>
       </span>
     </div>
   </footer>
@@ -71,9 +68,10 @@ footer {
   // position: relative;
   background: #3d4852;
   .link {
+    margin:0 10px;
     color: #fff;
     .icon {
-      font-size: 28px;
+      font-size: 16px;
       &:hover {
         color: #929292;
       }
