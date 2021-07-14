@@ -18,6 +18,12 @@
       "@/*": [
         "src/*"
       ],
+      "@/api/*": [
+        "src/api/*"
+      ],
+      "@/types/*": [
+        "src/types/*"
+      ],
       "@/components/*": [
         "src/components/*"
       ],

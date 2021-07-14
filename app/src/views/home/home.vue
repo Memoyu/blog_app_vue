@@ -19,20 +19,25 @@
           <div class="right-card-title">标签</div>
           <tag-list-card></tag-list-card>
         </div>
-        <div>    <div class="right-card-title">本站信息</div>
-        <info-card></info-card></div>
+        <div>
+          <div class="right-card-title">本站信息</div>
+          <info-card></info-card>
+        </div>
       </a-col>
     </a-row>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import IntroCard from "@/components/home/intro-card.vue";
 import ArticleListCard from "@/components/article/article-list-card.vue";
 import InfoCard from "@/components/home/info-card.vue";
 import CategoryListCard from "@/components/category/category-list-card.vue";
 import TagListCard from "@/components/tag/tag-list-card.vue";
+import service from "@/api";
+import { article } from "@/api/urls";
+import { ArticleListItem } from "@/types";
 
 export default defineComponent({
   name: "Home",
@@ -44,7 +49,15 @@ export default defineComponent({
     TagListCard,
   },
   setup() {
-    console.log("home setup");
+    onMounted(() => {
+      handleLoadArticle();
+    });
+
+    const handleLoadArticle = async (): Promise<void> => {
+      const data: ArticleListItem = await service.get(article.pages, {
+      });
+      console.log(data)
+    };
   },
 });
 </script>
