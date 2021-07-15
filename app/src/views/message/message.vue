@@ -1,22 +1,22 @@
 <template>
   <div class="main-container">
     <div class="content">
-      <send-message-card class="message-card"></send-message-card>
-      <message-list-card></message-list-card>
+      <send-message class="message-card"></send-message>
+      <message-list></message-list>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SendMessageCard from "@/components/message/send-message-card.vue";
-import MessageListCard from "@/components/message/message-list-card.vue";
+import SendMessage from "@/components/message/send-message.vue";
+import MessageList from "@/components/message/message-list.vue";
 
 export default defineComponent({
   name: "MessageBoard",
   components: {
-    SendMessageCard,
-    MessageListCard
+    SendMessage,
+    MessageList
   },
 });
 </script>

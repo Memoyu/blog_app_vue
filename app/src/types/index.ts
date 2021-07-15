@@ -1,5 +1,11 @@
+
 // 文章列表项
-export interface ArticleListItem {
+export interface ArticlePageModel {
+    total: number;
+    items: Array<ArticleItemModel>;
+  }
+
+export interface ArticleItemModel {
     id: number,
     title: string,
     titleColor: string,
@@ -11,19 +17,19 @@ export interface ArticleListItem {
     hits: number,
     comments: number,
     thumbnailUrl: string,
-    category: Category,
-    tags: Array<Tag>,
+    category: CategoryModel,
+    tags: Array<TagModel>,
     createTime: string
 }
 
-export interface Category {
+export interface CategoryModel {
     id: number,
     name: string,
     sort: number,
     createTime: string
 }
 
-export interface Tag {
+export interface TagModel {
     id: number,
     name: string,
     sort: number,

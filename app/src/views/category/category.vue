@@ -2,22 +2,22 @@
   <div class="main-container">
     <div class="content">
       <div class="category-title">分类</div>
-      <tag-list-card class="category-card" size="large"></tag-list-card>
-      <article-list-card class="article-card"></article-list-card>
+      <tag-list class="category-card" size="large"></tag-list>
+      <article-list class="article-card"></article-list>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TagListCard from "@/components/tag/tag-list-card.vue";
-import ArticleListCard from "@/components/article/article-list-card.vue";
+import TagList from "@/components/tag/tag-list.vue";
+import ArticleList from "@/components/article/article-list.vue";
 
 export default defineComponent({
   name: "Category",
   components: {
-    TagListCard,
-    ArticleListCard,
+    TagList,
+    ArticleList,
   },
 });
 </script>
