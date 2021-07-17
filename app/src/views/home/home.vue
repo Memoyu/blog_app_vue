@@ -16,7 +16,7 @@
         </div>
         <div>
           <div class="right-card-title">本站信息</div>
-          <site-info-card :server="serverInfo" :blog="blogInfo"/>
+          <site-info-card :infos="infos"/>
         </div>
       </a-col>
     </a-row>
@@ -53,8 +53,7 @@ export default defineComponent({
       articleItems: [] as Array<ArticleItemModel>,
       categories: [] as Array<CategoryTotalModel>,
       tags: [] as Array<TagTotalModel>,
-      serverInfo: {} as ServerInfoModel,
-      blogInfo: {} as BlogInfoModel,
+      infos: [] as Array<any>,
       params: {
         title: "",
         author: "",
@@ -98,8 +97,17 @@ export default defineComponent({
     const handleBaseInfo = async (): Promise<void> => {
       const server: ServerInfoModel = await service.get(monitor.serverInfo, {});
       const blog: BlogInfoModel = await service.get(monitor.blogInfo, {});
-      state.serverInfo = server;
-      state.blogInfo = blog;
+       state.infos = [
+          { name: "文章总数 ", total: `${blog.articleTotal} 篇` },
+          { name: "分类总数", total: `${blog.categoryTotal} 个` },
+          { name: "标签总数", total: `${blog.tagTotal} 个` },
+          { name: "留言总数", total: `${blog.commentTotal} 条` },
+          { name: "已运行", total: `${server.workingTime}` },
+          { name: "环境", total: `${server.environmentName}` },
+          { name: "OS_架构", total: `${server.osArchitecture}` },
+          { name: "内存占用", total: `${server.memoryFootprint}` },
+          { name: "后端框架", total: `${server.frameworkDescription}` },
+        ];
     };
 
     return {

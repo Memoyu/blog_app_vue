@@ -14,38 +14,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, toRefs, reactive, watch } from "vue";
-import { ServerInfoModel, BlogInfoModel } from "@/types";
+import {
+  defineComponent,
+  PropType,
+  toRefs,
+  reactive,
+} from "vue";
 
 export default defineComponent({
   props: {
-    server: {
-      type: Object as PropType<ServerInfoModel>,
+    infos: {
+      type: Array as PropType<any[]>,
       default: () => {
-        return {};
-      },
-    },
-    blog: {
-      type: Object as PropType<BlogInfoModel>,
-      default: () => {
-        return {};
+        return [
+          { name: "文章总数", total: `0 篇` },
+          { name: "分类总数", total: `0 个` },
+          { name: "标签总数", total: `0 个` },
+          { name: "留言总数", total: `0 条` },
+          { name: "已运行", total: "" },
+          { name: "环境", total: "" },
+          { name: "OS_架构", total: "" },
+          { name: "内存占用", total: "" },
+          { name: "后端框架 ", total: "" },
+        ] as Array<any>;
       },
     },
   },
-  setup(props) {
-    const state = reactive({
-      infos: [
-        { name: "文章总数", total: `${props.blog.articleTotal} 篇` },
-        { name: "分类总数", total: `${props.blog.categoryTotal} 个` },
-        { name: "标签总数", total: `${props.blog.tagTotal} 个` },
-        { name: "留言总数", total: `${props.blog.commentTotal} 条` },
-        { name: "已运行", total: `${props.server.workingTime}` },
-        { name: "环境", total: `${props.server.environmentName}` },
-        { name: "OS_架构", total: `${props.server.osArchitecture}` },
-        { name: "内存占用", total: `${props.server.memoryFootprint}` },
-        { name: "后端框架", total: `${props.server.frameworkDescription}` },
-      ] as Array<any>,
-    });
+  setup() {
+    const state = reactive({});
 
     return {
       ...toRefs(state),

@@ -19,7 +19,7 @@
       <div class="contact-meta">
         <ul class="meta-list">
           <li class="item author clickable">
-            <a  href="https://github.com/Memoyu" target="_blank">
+            <a href="https://github.com/Memoyu" target="_blank">
               <icon icon="GithubOutlined"></icon>
             </a>
           </li>
@@ -65,16 +65,16 @@ export default defineComponent({
     const isShowAboutMe = computed(() => {
       return store.state.app.showAboutMe;
     });
-    const state = reactive({
-      closeAboutMe() {
-        store.dispatch(AppActionTypes.ACTION_HIDE_ABOUT_ME);
-      },
-    });
+    const state = reactive({});
+    const closeAboutMe = () => {
+      store.dispatch(AppActionTypes.ACTION_HIDE_ABOUT_ME);
+    };
 
     return {
       isShowAboutMe,
       introduction,
       ...toRefs(state),
+      closeAboutMe,
     };
   },
 });

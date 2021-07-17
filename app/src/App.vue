@@ -5,13 +5,13 @@
       <router-view class="warp animate" />
       <a-back-top />
       <core-footer />
-      <core-about-me-drawer/>
     </section>
+    <core-about-me-drawer />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent,reactive,toRefs } from "vue";
 import CoreHeaderNav from "@/components/core/core-header-nav.vue";
 import CoreFooter from "@/components/core/core-footer.vue";
 import CoreAboutMeDrawer from "@/components/core/core-about-me-drawer.vue";
@@ -21,11 +21,12 @@ export default defineComponent({
   components: {
     CoreHeaderNav,
     CoreFooter,
-    CoreAboutMeDrawer
+    CoreAboutMeDrawer,
   },
   setup() {
-    return {
-    };
+    const state = reactive({
+    });
+    return {...toRefs(state)};
   },
 });
 </script>
