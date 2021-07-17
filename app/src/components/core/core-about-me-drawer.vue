@@ -1,26 +1,48 @@
 <template>
-  <a-drawer placement="right" :mask="false" :closable="false" :visible="isShowAboutMe">
+  <a-drawer
+    placement="right"
+    :width="320"
+    :mask="false"
+    :closable="false"
+    :visible="isShowAboutMe"
+  >
     <div class="y-f about-content">
       <img class="logo" src="@/assets/icons/logo.png" alt />
       <span class="name">Memoyu</span>
-      <marquee scrollamount="3">{{introduction}}</marquee>
-      <span>
-        <icon icon="EnvironmentOutlined"></icon>Guangzhou
-      </span>
+      <marquee scrollamount="3">{{ introduction }}</marquee>
+      <span> <icon icon="EnvironmentOutlined"></icon>Guangzhou </span>
     </div>
-    <div class="about-contact">
-      <a-button class="follow-button" type="primary" shape="round">关注我</a-button>
-      <div class="x-ac fs20 contact-button">
-        <icon icon="GithubOutlined"></icon>
-        <icon icon="QqOutlined"></icon>
-        <icon icon="MailOutlined"></icon>
+    <div class="about-contact y-f">
+      <a-button class="follow-button" type="primary" shape="round"
+        >关注我</a-button
+      >
+      <div class="contact-meta">
+        <ul class="meta-list">
+          <li class="item author clickable">
+            <a  href="https://github.com/Memoyu" target="_blank">
+              <icon icon="GithubOutlined"></icon>
+            </a>
+          </li>
+
+          <li class="item author clickable">
+            <router-link :to="{ path: `` }" target="_blank">
+              <icon icon="QqOutlined"></icon>
+            </router-link>
+          </li>
+
+          <li class="item author clickable">
+            <router-link :to="{ path: `` }" target="_blank">
+              <icon icon="MailOutlined"></icon>
+            </router-link>
+          </li>
+        </ul>
       </div>
     </div>
 
     <div class="x-ac about-top">
       <a-button type="primary" shape="circle" @click="closeAboutMe">
         <template #icon>
-          <icon style="font-weight: bold;" icon="CloseOutlined"></icon>
+          <icon style="font-weight: bold" icon="CloseOutlined"></icon>
         </template>
       </a-button>
     </div>
@@ -77,8 +99,34 @@ export default defineComponent({
   .follow-button {
     width: 200px;
   }
-  .contact-button {
-    padding-top: 20px;
+  .contact-meta {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    color: #808da3;
+    .meta-list {
+      display: flex;
+      align-items: baseline;
+      white-space: nowrap;
+      padding-left: 0 !important;
+      a {
+        color: #808da3;
+      }
+      .item a:hover {
+        color: #007fff;
+      }
+      .item.author {
+        display: flex;
+        align-items: baseline;
+      }
+      .item:not(:last-child)::after {
+        content: "";
+        color: rgb(178, 186, 194);
+        margin: 0px 12px;
+      }
+    }
   }
 }
 </style>

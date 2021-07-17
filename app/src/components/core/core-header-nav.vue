@@ -97,7 +97,7 @@ export default defineComponent({
   .menu {
     background: #fff;
     position: relative;
-    width: 1300px;
+    width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;

@@ -1,16 +1,11 @@
 <template>
   <div class="main-container">
-    <a-row type="flex" :gutter="10">
-      <!-- 左 -->
-      <a-col class="left" flex="20%">
-        <intro-card></intro-card>
-      </a-col>
-      <!-- 中 -->
-      <a-col class="middle" flex="60%">
+    <a-row class="row-bg" :gutter="20">
+      <a-col :xs="24" :md="17">
         <article-list :articles="articleItems" />
       </a-col>
-      <!-- 右 -->
-      <a-col class="right" flex="20%">
+
+      <a-col :xs="24" :md="7">
         <div>
           <div class="right-card-title">分类</div>
           <category-list></category-list>
@@ -30,7 +25,6 @@
 
 <script lang="ts">
 import { defineComponent, reactive, onMounted, toRefs } from "vue";
-import IntroCard from "@/components/home/intro-card.vue";
 import ArticleList from "@/components/article/article-list.vue";
 import InfoCard from "@/components/home/info-card.vue";
 import CategoryList from "@/components/category/category-list.vue";
@@ -42,7 +36,6 @@ import { ArticlePageModel, ArticleItemModel } from "@/types";
 export default defineComponent({
   name: "Home",
   components: {
-    IntroCard,
     ArticleList,
     InfoCard,
     CategoryList,
@@ -84,26 +77,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.ant-row {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
 .right-card-title {
+  font-size: 15px;
   text-align: center;
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-bottom: 3px solid #ec7259;
 }
-// .left {
-//   background: green;
-// }
-
-// .middle {
-//   background: yellow;
-// }
-
-// .right {
-//   background: blue;
-// }
 </style>
 
