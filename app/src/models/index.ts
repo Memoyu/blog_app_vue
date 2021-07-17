@@ -11,7 +11,7 @@ export interface ArticleItemModel {
     titleColor: string,
     subtitle: string,
     introduction: string,
-    author: string,
+    user: UserModel,
     url: string,
     isTop: boolean,
     hits: number,
@@ -19,6 +19,47 @@ export interface ArticleItemModel {
     thumbnailUrl: string,
     category: CategoryModel,
     tags: Array<TagModel>,
+    createTime: string
+}
+
+export interface ArticleDetailModel {
+    html: string,
+    markdown: string,
+    id: number,
+    title: string,
+    titleColor: string,
+    subtitle: string,
+    introduction: string,
+    user: UserModel,
+    url: string,
+    isTop: boolean,
+    hits: number,
+    comments: number,
+    thumbnailUrl: string,
+    category: CategoryModel,
+    tags: Array<TagModel>,
+    createTime: string
+    articleContent: articleContentModel
+}
+
+
+export interface articleContentModel {
+    html: string,
+    markdown: string
+}
+
+export interface UserModel {
+    id: number,
+    userId: number,
+    userType: number,
+    userTypeName: string,
+    avatarUrl: string,
+    userUrl: string,
+    name: string,
+    company: string,
+    location: string,
+    email: string,
+    bio: string,
     createTime: string
 }
 

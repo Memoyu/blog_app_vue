@@ -22,7 +22,7 @@
         "src/api/*"
       ],
       "@/types/*": [
-        "src/types/*"
+        "src/models/*"
       ],
       "@/components/*": [
         "src/components/*"

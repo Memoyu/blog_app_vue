@@ -1,8 +1,17 @@
 <template>
-  <div class="main-container">
+  <div class="main-container warp">
     <a-row class="row-bg" :gutter="20">
       <a-col :xs="24" :md="17">
         <article-list :articles="articleItems" />
+        <infinite-loading
+          @infinite="handleInfiniteLoad"
+          spinner="bubbles"
+          :identifier="any"
+        >
+          <template v-slot:no-more>
+           <a-divider >我也是有底线的...</a-divider>
+          </template>
+        </infinite-loading>
       </a-col>
 
       <a-col :xs="24" :md="7">
@@ -16,7 +25,7 @@
         </div>
         <div>
           <div class="right-card-title">本站信息</div>
-          <site-info-card :infos="infos"/>
+          <site-info-card :infos="infos" />
         </div>
       </a-col>
     </a-row>
@@ -25,6 +34,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, onMounted, toRefs } from "vue";
+import InfiniteLoading from "vue-infinite-loading";
 import ArticleList from "@/components/article/article-list.vue";
 import SiteInfoCard from "@/components/home/site-info-card.vue";
 import CategoryList from "@/components/category/category-list.vue";
@@ -38,7 +48,7 @@ import {
   TagTotalModel,
   ServerInfoModel,
   BlogInfoModel,
-} from "@/types";
+} from "@/models";
 
 export default defineComponent({
   name: "Home",
@@ -47,6 +57,7 @@ export default defineComponent({
     SiteInfoCard,
     CategoryList,
     TagList,
+    InfiniteLoading,
   },
   setup() {
     const state = reactive({
@@ -65,20 +76,23 @@ export default defineComponent({
         size: 10,
         sort: "",
       },
+      loading: false,
+      any: new Date(),
+      total: 0,
     });
 
     onMounted(() => {
-      handleLoadArticle();
+      // handleLoadArticle();
       handleLoadCategory();
       handleLoadTag();
       handleBaseInfo();
     });
 
-    const handleLoadArticle = async (): Promise<void> => {
+    const handleLoadArticle = async (): Promise<ArticlePageModel> => {
       const data: ArticlePageModel = await service.get(article.pages, {
         params: state.params,
       });
-      state.articleItems = [...state.articleItems, ...data.items];
+      return data;
     };
 
     const handleLoadCategory = async (): Promise<void> => {
@@ -97,17 +111,41 @@ export default defineComponent({
     const handleBaseInfo = async (): Promise<void> => {
       const server: ServerInfoModel = await service.get(monitor.serverInfo, {});
       const blog: BlogInfoModel = await service.get(monitor.blogInfo, {});
-       state.infos = [
-          { name: "文章总数 ", total: `${blog.articleTotal} 篇` },
-          { name: "分类总数", total: `${blog.categoryTotal} 个` },
-          { name: "标签总数", total: `${blog.tagTotal} 个` },
-          { name: "留言总数", total: `${blog.commentTotal} 条` },
-          { name: "已运行", total: `${server.workingTime}` },
-          { name: "环境", total: `${server.environmentName}` },
-          { name: "OS_架构", total: `${server.osArchitecture}` },
-          { name: "内存占用", total: `${server.memoryFootprint}` },
-          { name: "后端框架", total: `${server.frameworkDescription}` },
-        ];
+      state.infos = [
+        { name: "文章总数", total: `${blog.articleTotal} 篇` },
+        { name: "分类总数", total: `${blog.categoryTotal} 个` },
+        { name: "标签总数", total: `${blog.tagTotal} 个` },
+        { name: "留言总数", total: `${blog.commentTotal} 条` },
+        { name: "已运行", total: `${server.workingTime}` },
+        { name: "环境", total: `${server.environmentName}` },
+        { name: "OS_架构", total: `${server.osArchitecture}` },
+        { name: "内存占用", total: `${server.memoryFootprint}` },
+        { name: "后端框架", total: `${server.frameworkDescription}` },
+      ];
+    };
+
+    const handleInfiniteLoad = async ($state: any): Promise<void> => {
+      state.loading = true;
+
+      const currentPage = state.params.page;
+      var data = await handleLoadArticle();
+      var items = [...data.items];
+
+      if (items.length == 0) {
+        if (currentPage == 0) {
+          state.articleItems = items;
+        }
+        $state && $state.complete();
+      } else {
+        if (currentPage == 0) {
+          state.articleItems = items;
+        } else {
+          state.articleItems = state.articleItems.concat(items);
+        }
+        state.params.page += 1;
+        $state && $state.loaded();
+      }
+      state.loading = false;
     };
 
     return {
@@ -116,6 +154,7 @@ export default defineComponent({
       handleLoadCategory,
       handleLoadTag,
       handleBaseInfo,
+      handleInfiniteLoad,
     };
   },
 });
@@ -129,6 +168,12 @@ export default defineComponent({
   margin-top: 10px;
   margin-bottom: 10px;
   border-bottom: 3px solid #ec7259;
+}
+.ant-divider-horizontal.ant-divider-with-text-center::before{
+  border-top:1px solid #ec7259 !important;
+}
+.ant-divider-horizontal.ant-divider-with-text-center::after{
+  border-top:1px solid #ec7259 !important;
 }
 </style>
 

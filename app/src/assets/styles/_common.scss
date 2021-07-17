@@ -1,6 +1,13 @@
+.header-menu{
+	position: relative;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+	width: 1200px;
+}
 .main-container {
 	margin: 0 auto;
-	max-width: 1140px;
+	max-width: 1200px;
 	padding-top: 2em;
 	padding-bottom: 2em;
 }

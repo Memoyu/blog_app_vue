@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, reactive, toRefs } from "vue";
-import { TagTotalModel } from "@/types";
+import { TagTotalModel } from "@/models";
 
 export default defineComponent({
   props: {

@@ -2,7 +2,7 @@
   <div id="app">
     <core-header-nav />
     <section class="section-content">
-      <router-view class="warp animate" />
+      <router-view class="animate" />
       <a-back-top />
       <core-footer />
     </section>

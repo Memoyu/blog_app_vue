@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, toRefs, reactive } from "vue";
-import { CategoryTotalModel } from "@/types";
+import { CategoryTotalModel } from "@/models";
 
 export default defineComponent({
   props: {

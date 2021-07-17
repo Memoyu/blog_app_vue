@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="header">
-      <div class="menu">
+      <div class="header-menu menu">
         <div class="content-center">
           <div class="title-container content-center" @click="controlAboutMe">
             <img class="logo" src="@/assets/icons/logo.png" alt />
@@ -96,11 +96,7 @@ export default defineComponent({
   margin-top: 20px;
   .menu {
     background: #fff;
-    position: relative;
-    width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+
     padding: 0 20px;
     .title-container {
       margin-right: 70px;

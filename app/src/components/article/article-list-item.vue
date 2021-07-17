@@ -3,12 +3,18 @@
     <div class="article-container">
       <div class="article-content">
         <div class="title-row fs20">
-          <router-link
-            target="_blank"
-            class="article-detail-title"
-            :to="{ path: '/article/' + article.id }"
-            >{{ article.title }}</router-link
-          >
+          <a-tooltip placement="topLeft">
+            <template v-slot:title>
+              {{ article.title }}
+            </template>
+            <router-link
+              target="_blank"
+              class="article-detail-title"
+              :to="{ path: '/article/' + article.id }"
+            >
+              {{ article.title }}
+            </router-link>
+          </a-tooltip>
         </div>
 
         <div class="article-tags">
@@ -25,11 +31,11 @@
           <ul class="meta-list">
             <li class="item author clickable">
               <router-link
-                :to="{ path: `/user/${article.authorId}/article` }"
+                :to="{ path: `/user-article/${article.user.id}` }"
                 target="_blank"
               >
                 <icon icon="UserOutlined" />
-                {{ article.author }}
+                {{ article.user.name }}
               </router-link>
             </li>
             <li class="item">
@@ -63,7 +69,7 @@
 <script lang="ts">
 import { defineComponent, PropType, onMounted } from "vue";
 import { Icon } from "@/icon";
-import { ArticleItemModel } from "@/types";
+import { ArticleItemModel } from "@/models";
 
 export default defineComponent({
   components: { Icon },
@@ -81,7 +87,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .article-item-comp {
   background: white;
-  padding:5px 25px;
+  padding: 5px 25px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: row;

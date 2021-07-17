@@ -9,7 +9,7 @@
 <script lang="ts">
 import { defineComponent ,PropType } from "vue";
 import CategoryListItem from "./category-list-item.vue";
-import { CategoryTotalModel } from "@/types";
+import { CategoryTotalModel } from "@/models";
 
 export default defineComponent({
   components: {

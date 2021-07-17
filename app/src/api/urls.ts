@@ -1,6 +1,7 @@
 // url的链接
 export const article: any = {
-    pages: "article/pages"
+    pages: "article/pages",
+    detail: "article/"
 }
 
 export const category: any = {

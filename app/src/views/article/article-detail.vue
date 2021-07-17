@@ -1,25 +1,62 @@
 <template>
-  <div class="main-container">
-    <a-row :gutter="24">
-      <a-col :xl="18" :lg="18" :md="24" :sm="24" :xs="24">
-        <a-card class="preview">
-          <div id="article" class="article" @click="HandlePreview($event)"></div>
-        </a-card>
-      </a-col>
-      <a-col :xl="6" :lg="6" :md="24" :sm="24" :xs="24" class="sidebar-user">
-        <a-card
-          class="aside-list"
-          shadow="never"
-          :body-style="{ padding: '12px'}"
-          :style="'position: fixed; width:280px;'"
-        >
-          <div class="clearfix">
-            <span class="catalog">目录</span>
-          </div>
-          <div id="navigation" class="wx_navigation" />
-        </a-card>
-      </a-col>
-    </a-row>
+  <div>
+    <div class="header-menu article-detail-header x-c">
+      <div class="header-content y-f">
+        <span class="title">{{ articleDetail.title }}</span>
+        <div class="meta">
+          <span>
+            <icon icon="ClockCircleOutlined" />
+            发表于
+            {{ articleDetail.createTime }}
+          </span>
+          <span class="item">
+            <icon icon="EyeOutlined" />
+            阅读次数
+            {{ articleDetail.hits }}
+          </span>
+          <span class="item">
+            <icon icon="MessageOutlined" />
+            评论次数
+            {{ articleDetail.comments }}
+          </span>
+        </div>
+        <div class="tags">
+          <a-tag
+            color="#2db7f5"
+            v-for="tag in articleDetail.tags"
+            :key="tag.id"
+          >
+            {{ tag.name }}
+          </a-tag>
+        </div>
+      </div>
+    </div>
+    <div class="main-container warp">
+      <a-row :gutter="24">
+        <a-col :xl="18" :lg="18" :md="24" :sm="24" :xs="24">
+          <a-card class="preview">
+            <div
+              id="article"
+              class="article"
+              @click="HandlePreview($event)"
+            ></div>
+          </a-card>
+        </a-col>
+        <a-col :xl="6" :lg="6" :md="24" :sm="24" :xs="24" class="sidebar-user">
+          <a-card
+            class="aside-list"
+            shadow="never"
+            :body-style="{ padding: '12px' }"
+            :style="'position: fixed; width:270px;'"
+          >
+            <div class="clearfix">
+              <span class="catalog">目录</span>
+            </div>
+            <div id="navigation" class="wx_navigation" />
+          </a-card>
+        </a-col>
+      </a-row>
+    </div>
   </div>
 </template>
 
@@ -32,30 +69,30 @@ import {
   toRefs,
   nextTick,
 } from "vue";
-import { ArticleModel } from "@/model/articleModel";
+import { Icon } from "@/icon";
 import { useRouter, useRoute } from "vue-router";
 import Vditor from "vditor";
-import file from "raw-loader!./test-article-content.md";
+import service from "@/api";
+import { ArticleDetailModel } from "@/models";
+import { article } from "@/api/urls";
 declare let document: Document | any;
 
 export default defineComponent({
   name: "ArticleDetail",
-  components: {},
+  components: { Icon },
   setup(props) {
     const route = useRoute();
     const router = useRouter();
     const state = reactive({
-      articleReq: {
-        id: "",
-      },
-      articleDetail: {} as ArticleModel,
+      id: "0",
+      articleDetail: {} as ArticleDetailModel,
       aside: 0,
       scroll: 0,
       heightArr: [] as number[],
       nodes: [] as HTMLElement[],
     });
     onMounted(async () => {
-      state.articleReq.id = route.params.id as string;
+      state.id = route.params.id as string;
       GetArticleDetail();
       await nextTick(() => {
         window.addEventListener("scroll", DataScroll, true);
@@ -64,14 +101,18 @@ export default defineComponent({
 
     watch(
       () => state.scroll,
-      (oldVlaue, newValue) => {
+      () => {
         LoadSroll();
       }
     );
 
     const GetArticleDetail = async (): Promise<void> => {
-      let data = file;
-      Render(data);
+      const data: ArticleDetailModel = await service.get(
+        `${article.detail}${state.id}`,
+        {}
+      );
+      state.articleDetail = data;
+      Render(data.articleContent.markdown);
     };
 
     const Render = (markdown: string) => {
@@ -128,7 +169,7 @@ export default defineComponent({
         }
       }
       function judageH(node: any, i: number, domId: any) {
-        let articleId = state.articleReq.id;
+        let articleId = state.id;
         const reg = /^H[1-5]{1}$/;
         if (reg.exec(node.tagName)) {
           let cloneNode = node.cloneNode();
@@ -150,7 +191,7 @@ export default defineComponent({
               location.hash ==
               `#/article/${articleId}#${encodeURIComponent(id)}`
             ) {
-              console.log("Re")
+              console.log("Re");
               return;
             }
             let path = `/article/${articleId}#${id}`;
@@ -237,6 +278,34 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "~vditor/dist/index.css";
+.article-detail-header {
+  height: 300px;
+  background: url("https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb");
+  background-size: 100% 100%;
+
+  .header-content {
+    .title {
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .meta {
+      color: white;
+      font-size: 15px;
+      .item {
+        margin-left: 20px;
+      }
+    }
+    .tags {
+      margin: 10px 0;
+      .ant-tag {
+        font-size: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
 .preview {
   border-radius: 4px;
   border: 1px solid #ebeef5;
