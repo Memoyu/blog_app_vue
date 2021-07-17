@@ -2,22 +2,49 @@
   <div class="main-container">
     <div class="content">
       <div class="tag-title">标签</div>
-      <tag-list class="tag-card" size="large"></tag-list>
-      <article-list class="article-card"></article-list>
+      <div class="tag-card">
+        <tag-row :tags="tags" size="large"/>
+      </div>
+      <div class="article-card">
+        <article-list></article-list>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, onMounted, toRefs } from "vue";
 import TagList from "@/components/tag/tag-list.vue";
 import ArticleList from "@/components/article/article-list.vue";
+import TagRow from "@/components/tag/tag-row.vue";
+import service from "@/api";
+import { article, tag } from "@/api/urls";
+import { TagTotalModel } from "@/models";
 
 export default defineComponent({
   name: "Tag",
   components: {
-    TagList,
+    //TagList,
     ArticleList,
+    TagRow
+  },
+  setup() {
+    const state = reactive({
+      tags: [] as Array<TagTotalModel>,
+    });
+
+    onMounted(() => {
+      handleLoadTag();
+    });
+
+    const handleLoadTag = async (): Promise<void> => {
+      const data: Array<TagTotalModel> = await service.get(tag.all, {});
+      state.tags = data;
+    };
+
+    return {
+      ...toRefs(state)
+    }
   },
 });
 </script>
@@ -26,8 +53,10 @@ export default defineComponent({
 .tag-title {
   font-size: 20px;
   font-weight: bold;
-  margin-left: 30px;
+  margin-left: 10px;
   margin-bottom: 10px;
+  padding: 0 0 0 15px;
+  border-left: 5px solid #ec7259;
 }
 .tag-card {
   margin-bottom: 30px;

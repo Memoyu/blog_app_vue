@@ -16,7 +16,7 @@ import { TagTotalModel } from "@/models";
 export default defineComponent({
   props: {
     tag: {
-      type: Object as PropType<TagTotalModel>,
+      type: Object as PropType<any>,
       default: () => {
         return {};
       },
@@ -38,8 +38,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .tag-item-comp {
   .tag-container {
-    margin-bottom: 12px;
-    margin-right: 12px;
     .tag {
       align-items: center;
       background-color: #f5f5f5;

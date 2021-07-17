@@ -2,32 +2,63 @@
   <div class="main-container">
     <div class="content">
       <div class="category-title">分类</div>
-      <tag-list class="category-card" size="large"></tag-list>
-      <article-list class="article-card"></article-list>
+      <div class="category-card">
+        <category-row  :categories="categories"/>
+      </div>
+      <div class="article-card">
+        <article-list></article-list>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import TagList from "@/components/tag/tag-list.vue";
+import { defineComponent, reactive, onMounted, toRefs } from "vue";
+import CategoryList from "@/components/category/category-list.vue";
+import CategoryRow from "@/components/category/category-row.vue";
 import ArticleList from "@/components/article/article-list.vue";
+import service from "@/api";
+import { article, category } from "@/api/urls";
+import { CategoryTotalModel } from "@/models";
 
 export default defineComponent({
   name: "Category",
   components: {
-    TagList,
+   // CategoryList,
     ArticleList,
+    CategoryRow
+  },
+  setup() {
+    const state = reactive({
+      categories: [] as Array<CategoryTotalModel>,
+    });
+
+    onMounted(() => {
+      handleLoadCategory();
+    });
+
+    const handleLoadCategory = async (): Promise<void> => {
+      const data: Array<CategoryTotalModel> = await service.get(
+        category.all,
+        {}
+      );
+      state.categories = data;
+    };
+    return {
+      ...toRefs(state)
+    }
   },
 });
 </script>
 
 <style lang="scss">
 .category-title {
-  font-size: 20px;
+   font-size: 20px;
   font-weight: bold;
-  margin-left: 30px;
+  margin-left: 10px;
   margin-bottom: 10px;
+  padding: 0 0 0 15px;
+  border-left: 5px solid #ec7259;
 }
 .category-card {
   margin-bottom: 30px;

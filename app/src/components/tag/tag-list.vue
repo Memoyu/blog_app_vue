@@ -1,13 +1,19 @@
 <template>
   <div class="tag-comp card-border-radius">
     <div class="x-start tags-container">
-      <tag-list-item v-for="tag in tags" :key="tag.id" :tag="tag" :size="size"/>
+      <tag-list-item
+        class="tag-list-item"
+        v-for="tag in tags"
+        :key="tag.id"
+        :tag="tag"
+        :size="size"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent , PropType, reactive, toRefs } from "vue";
+import { defineComponent, PropType, reactive, toRefs } from "vue";
 import TagListItem from "./tag-list-item.vue";
 import { TagTotalModel } from "@/models";
 
@@ -19,8 +25,8 @@ export default defineComponent({
     tags: {
       type: Array as PropType<TagTotalModel[]>,
       default: () => {
-        return []
-      }
+        return [];
+      },
     },
     size: {
       type: String,
@@ -43,6 +49,10 @@ export default defineComponent({
   margin-bottom: 20px;
   .tags-container {
     flex-wrap: wrap;
+    .tag-list-item {
+      margin-bottom: 12px;
+      margin-right: 12px;
+    }
   }
 }
 </style>

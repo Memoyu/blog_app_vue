@@ -1,11 +1,13 @@
 <template>
-  <div class="tag-comp card-border-radius">
-    <div class="tag-title">标签</div>
-    <a-divider />
-    <div class="tag-content">
-      <a-row :gutter="[16,24]">
-        <a-col v-for="item in tags" :key="item.toString()" :span="16 / tags.length">
-          <div class="tag-item">标签{{item.toString()}}</div>
+  <div class="tag-row-comp card-border-radius">
+    <div class="tag-row-content">
+      <a-row :gutter="[6, 24]">
+        <a-col
+          v-for="tag in tags"
+          :key="tag.id"
+          :span="24 / tags.length"
+        >
+          <tag-list-item class="tag-list-item" size="large" :tag="tag"/>
         </a-col>
       </a-row>
     </div>
@@ -13,73 +15,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import TagListItem from "./tag-list-item.vue";
+import { TagTotalModel } from "@/models";
+
 export default defineComponent({
+  components: {
+    TagListItem,
+  },
   props: {
     tags: {
-      type: Array,
-      default: () => [
-        10,
-        20,
-        30,
-        50,
-        60,
-        70,
-        80,
-        90,
-        100,
-        20,
-        303,
-        5022222,
-        6022,
-        70111,
-        80,
-        90,
-        100,
-        20,
-        30,
-        50,
-        60,
-        70,
-        80,
-        90,
-        100,
-        20,
-        30,
-        50,
-        60,
-        70,
-        80,
-        90,
-        100,
-        20,
-        30,
-        50,
-        60,
-        70,
-        80,
-        90,
-        100,
-      ],
+      type: Array as PropType<TagTotalModel[]>,
+      default: () => {
+        return [];
+      },
     },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.tag-comp {
+.tag-row-comp {
   padding: 10px;
   background: white;
-  .tag-title {
-    font-size: 19px;
-    font-weight: bold;
-    margin: 20px;
-  }
-  .tag-content {
-    .tag-item {
-      height: 50px;
-      line-height: 50px;
-      background: rgb(202, 187, 187);
+  .tag-row-content {
+    .tag-list-item {
+      margin-left: 12px;
     }
   }
 }
