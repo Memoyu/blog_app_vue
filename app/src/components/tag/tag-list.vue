@@ -7,8 +7,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent , PropType, reactive, toRefs } from "vue";
 import TagListItem from "./tag-list-item.vue";
+import { TagTotalModel } from "@/types";
 
 export default defineComponent({
   components: {
@@ -16,19 +17,10 @@ export default defineComponent({
   },
   props: {
     tags: {
-      type: Array,
-      default: () => [
-        { name: "随笔", total: 10 },
-        { name: ".NET Core", total: 20 },
-        { name: "C#", total: 30 },
-        { name: "阿里云", total: 50 },
-        { name: "任务调度", total: 60 },
-        { name: "Kafka", total: 70 },
-        { name: "Linux", total: 80 },
-         { name: "Vue", total: 80 },
-        { name: "Docker", total: 90 },
-        { name: "微服务", total: 100 },
-      ],
+      type: Array as PropType<TagTotalModel[]>,
+      default: () => {
+        return []
+      }
     },
     size: {
       type: String,
@@ -36,10 +28,10 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const dataMap = reactive({
+    const state = reactive({
       size: props.size,
     });
-    return { ...toRefs(dataMap) };
+    return { ...toRefs(state) };
   },
 });
 </script>

@@ -2,8 +2,8 @@
   <div class="tag-item-comp">
     <div class="tag-container">
       <a class="x-start link-none-line" href="">
-        <span :class="['tag', size, 'tag-name']">{{ tagInfo.name }}</span>
-        <span :class="['tag', size, 'tag-total']">{{ tagInfo.total }}</span>
+        <span :class="['tag', size, 'tag-name']">{{ tag.name }}</span>
+        <span :class="['tag', size, 'tag-total']">{{ tag.total }}</span>
       </a>
     </div>
   </div>
@@ -11,15 +11,12 @@
 
 <script lang="ts">
 import { defineComponent, PropType, reactive, toRefs } from "vue";
-interface Tag {
-  name: string;
-  total: number;
-}
+import { TagTotalModel } from "@/types";
 
 export default defineComponent({
   props: {
     tag: {
-      type: Object as PropType<Tag>,
+      type: Object as PropType<TagTotalModel>,
       default: () => {
         return {};
       },
@@ -31,7 +28,6 @@ export default defineComponent({
   },
   setup(props) {
     const dataMap = reactive({
-      tagInfo: props.tag,
       size: props.size == "small" ? "tag-small" : "tag-large",
     });
     return { ...toRefs(dataMap) };

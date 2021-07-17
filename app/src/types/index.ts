@@ -3,7 +3,7 @@
 export interface ArticlePageModel {
     total: number;
     items: Array<ArticleItemModel>;
-  }
+}
 
 export interface ArticleItemModel {
     id: number,
@@ -29,9 +29,35 @@ export interface CategoryModel {
     createTime: string
 }
 
+export interface CategoryTotalModel extends CategoryModel {
+    total: number
+}
+
+
 export interface TagModel {
     id: number,
     name: string,
     sort: number,
     createTime: string,
+}
+
+export interface TagTotalModel extends TagModel{
+    total: number
+}
+
+export interface ServerInfoModel {
+    environmentName: string,
+    osArchitecture: string,
+    contentRootPath: string,
+    webRootPath: string,
+    frameworkDescription: string,
+    memoryFootprint: string,
+    workingTime: string
+}
+
+export interface BlogInfoModel {
+    articleTotal: number,
+    categoryTotal: number,
+    tagTotal: number,
+    commentTotal: number
 }

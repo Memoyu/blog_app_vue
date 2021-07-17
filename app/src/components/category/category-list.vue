@@ -7,8 +7,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent ,PropType } from "vue";
 import CategoryListItem from "./category-list-item.vue";
+import { CategoryTotalModel } from "@/types";
 
 export default defineComponent({
   components: {
@@ -16,18 +17,10 @@ export default defineComponent({
   },
   props: {
     categories: {
-      type: Array,
-      default: () => [
-        { name: "随笔", total: 10 },
-        { name: ".NET Core", total: 20 },
-        { name: "C#", total: 30 },
-        { name: "阿里云", total: 50 },
-        { name: "任务调度", total: 60 },
-        { name: "Kafka", total: 70 },
-        { name: "Linux", total: 80 },
-        { name: "Docker", total: 90 },
-        { name: "微服务", total: 100 },
-      ],
+      type: Array as PropType<CategoryTotalModel[]>,
+      default: () => {
+        return []
+      }
     },
   },
 });

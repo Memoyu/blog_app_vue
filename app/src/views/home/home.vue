@@ -8,15 +8,15 @@
       <a-col :xs="24" :md="7">
         <div>
           <div class="right-card-title">分类</div>
-          <category-list></category-list>
+          <category-list :categories="categories" />
         </div>
         <div>
           <div class="right-card-title">标签</div>
-          <tag-list></tag-list>
+          <tag-list :tags="tags" />
         </div>
         <div>
           <div class="right-card-title">本站信息</div>
-          <info-card></info-card>
+          <site-info-card :server="serverInfo" :blog="blogInfo"/>
         </div>
       </a-col>
     </a-row>
@@ -26,24 +26,35 @@
 <script lang="ts">
 import { defineComponent, reactive, onMounted, toRefs } from "vue";
 import ArticleList from "@/components/article/article-list.vue";
-import InfoCard from "@/components/home/info-card.vue";
+import SiteInfoCard from "@/components/home/site-info-card.vue";
 import CategoryList from "@/components/category/category-list.vue";
 import TagList from "@/components/tag/tag-list.vue";
 import service from "@/api";
-import { article } from "@/api/urls";
-import { ArticlePageModel, ArticleItemModel } from "@/types";
+import { article, category, tag, monitor } from "@/api/urls";
+import {
+  ArticlePageModel,
+  ArticleItemModel,
+  CategoryTotalModel,
+  TagTotalModel,
+  ServerInfoModel,
+  BlogInfoModel,
+} from "@/types";
 
 export default defineComponent({
   name: "Home",
   components: {
     ArticleList,
-    InfoCard,
+    SiteInfoCard,
     CategoryList,
     TagList,
   },
   setup() {
     const state = reactive({
       articleItems: [] as Array<ArticleItemModel>,
+      categories: [] as Array<CategoryTotalModel>,
+      tags: [] as Array<TagTotalModel>,
+      serverInfo: {} as ServerInfoModel,
+      blogInfo: {} as BlogInfoModel,
       params: {
         title: "",
         author: "",
@@ -59,6 +70,9 @@ export default defineComponent({
 
     onMounted(() => {
       handleLoadArticle();
+      handleLoadCategory();
+      handleLoadTag();
+      handleBaseInfo();
     });
 
     const handleLoadArticle = async (): Promise<void> => {
@@ -68,9 +82,32 @@ export default defineComponent({
       state.articleItems = [...state.articleItems, ...data.items];
     };
 
+    const handleLoadCategory = async (): Promise<void> => {
+      const data: Array<CategoryTotalModel> = await service.get(
+        category.all,
+        {}
+      );
+      state.categories = data;
+    };
+
+    const handleLoadTag = async (): Promise<void> => {
+      const data: Array<TagTotalModel> = await service.get(tag.all, {});
+      state.tags = data;
+    };
+
+    const handleBaseInfo = async (): Promise<void> => {
+      const server: ServerInfoModel = await service.get(monitor.serverInfo, {});
+      const blog: BlogInfoModel = await service.get(monitor.blogInfo, {});
+      state.serverInfo = server;
+      state.blogInfo = blog;
+    };
+
     return {
       ...toRefs(state),
       handleLoadArticle,
+      handleLoadCategory,
+      handleLoadTag,
+      handleBaseInfo,
     };
   },
 });

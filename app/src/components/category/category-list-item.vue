@@ -1,23 +1,20 @@
 <template>
   <div class="category-item-comp">
     <a class="x-bc link-none-line category-container">
-      <span class="category-name">{{ categoryInfo.name }}</span>
-      <span class="category-total">{{ categoryInfo.total }}</span>
+      <span class="category-name">{{ category.name }}</span>
+      <span class="category-total">{{ category.total }}</span>
     </a>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, toRefs, reactive } from "vue";
-interface Category {
-  name: string;
-  total: number;
-}
+import { CategoryTotalModel } from "@/types";
 
 export default defineComponent({
   props: {
     category: {
-      type: Object as PropType<Category>,
+      type: Object as PropType<CategoryTotalModel>,
       default: () => {
         return {};
       },
@@ -25,7 +22,6 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
-      categoryInfo: props.category,
     });
     return { ...toRefs(state) };
   },
