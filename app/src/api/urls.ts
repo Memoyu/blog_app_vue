@@ -12,6 +12,10 @@ export const tag: any = {
     all: "tag/all"
 }
 
+export const friendLink: any = {
+    all: "friend-link/all"
+}
+
 export const monitor: any = {
     serverInfo: "monitor/server-info",
     blogInfo: "monitor/blog-info"

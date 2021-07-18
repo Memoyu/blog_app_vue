@@ -1,5 +1,5 @@
 <template>
-  <div class="article-item-comp">
+  <div class="article-item-comp  card-border-radius">
     <div class="article-container">
       <div class="article-content">
         <div class="title-row fs20">

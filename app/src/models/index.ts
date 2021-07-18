@@ -74,7 +74,6 @@ export interface CategoryTotalModel extends CategoryModel {
     total: number
 }
 
-
 export interface TagModel {
     id: number,
     name: string,
@@ -101,4 +100,14 @@ export interface BlogInfoModel {
     categoryTotal: number,
     tagTotal: number,
     commentTotal: number
+}
+
+export interface FriendLinkModel {
+      id: number,
+      title: string,
+      desc: string,
+      avatarUrl: string,
+      linkUrl: string,
+      type: number,
+      createTime: string
 }

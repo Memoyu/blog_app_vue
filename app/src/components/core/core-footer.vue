@@ -19,7 +19,7 @@
         <a href="https://github.com/Memoyu" target="_blank" class="link">
           <icon class="icon" icon="GithubOutlined" />
         </a>
-        <a target="_blank" style="color: #fff">桂ICP备20005450号-1</a>
+        <a target="_blank" style="color: black">桂ICP备20005450号-1</a>
       </span>
     </div>
   </footer>
@@ -66,10 +66,10 @@ export default defineComponent({
 <style scoped lang="scss">
 footer {
   // position: relative;
-  background: #3d4852;
+  background: transparent;
   .link {
     margin:0 10px;
-    color: #fff;
+    color: black;
     .icon {
       font-size: 16px;
       &:hover {
@@ -86,11 +86,11 @@ footer {
     // background: #93a6ab;
     width: 100%;
     padding: 10px 0 15px;
-    color: #fff;
+    color: black;
     .base {
       span,
       .green {
-        color: #ffed4a;
+        color: blue($color: #000000);
         font-size: 16px;
         margin: 0 2px;
       }

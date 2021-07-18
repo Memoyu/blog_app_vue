@@ -47,11 +47,11 @@
             class="aside-list"
             shadow="never"
             :body-style="{ padding: '12px' }"
-            :style="'position: fixed; width:270px;'"
+            :style="aside > 300?'position: fixed;top:30px;width:260px;':''"
           >
-            <div class="clearfix">
+            <template v-slot:header >
               <span class="catalog">目录</span>
-            </div>
+            </template>
             <div id="navigation" class="wx_navigation" />
           </a-card>
         </a-col>
@@ -246,7 +246,8 @@ export default defineComponent({
       state.scroll =
         document.documentElement.scrollTop ||
         document.body.scrollTop ||
-        document.querySelector("#preview").scrollTop;
+        document.querySelector("#article").scrollTop;
+
       state.aside =
         document.documentElement.scrollTop ||
         document.body.scrollTop ||

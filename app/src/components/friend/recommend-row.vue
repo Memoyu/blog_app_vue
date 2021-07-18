@@ -4,14 +4,20 @@
     <a-divider />
     <div class="friend-content">
       <a-row :gutter="20">
-        <a-col :xs="24" :sm="12" :md="8" v-for="item in friends" :key="item.id">
-          <a :href="item.url" target="_blank" class="link-box animate">
+        <a-col
+          :xs="24"
+          :sm="12"
+          :md="8"
+          v-for="recommend in recommends"
+          :key="recommend.id"
+        >
+          <a :href="recommend.linkUrl" target="_blank" class="link-box animate">
             <div class="imgbox">
-              <img :src="item.img" />
+              <img :src="recommend.avatarUrl" />
             </div>
             <div class="desc">
-              <h4>{{item.title}}</h4>
-              <p>{{item.desc}}</p>
+              <h3>{{ recommend.title }}</h3>
+              <p>{{ recommend.desc }}</p>
             </div>
           </a>
         </a-col>
@@ -23,90 +29,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import { FriendLinkModel } from "@/models";
+
 export default defineComponent({
   props: {
-    friends: {
-      type: Array,
-      default: () => [
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-        {
-          title: "MemoyuBlog",
-          desc: "个人博客，欢迎来造！做技术，就该深入",
-          img:
-            "https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png",
-          url: "www.baidu.com",
-        },
-      ],
+    recommends: {
+      type: Array as PropType<FriendLinkModel[]>,
+      default: () => {
+        return [];
+      },
     },
   },
 });
@@ -117,9 +49,11 @@ export default defineComponent({
   padding: 10px;
   background: white;
   .friend-title {
-    font-size: 19px;
-    font-weight: bold;
     margin: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 0 0 15px;
+    border-left: 5px solid #ec7259;
   }
   .friend-content {
     .ant-col {
@@ -175,8 +109,9 @@ export default defineComponent({
         overflow: hidden;
         color: #475558;
         font-size: 14px;
-        h4 {
+        h3 {
           margin: 5px 0;
+          font-weight: bold;
         }
         p {
           height: 62px;
