@@ -169,39 +169,6 @@ export default defineComponent({
         }
       }
       function judageH(node: any, i: number, domId: any) {
-        // let articleId = state.id;
-        // const reg = /^H[1-5]{1}$/;
-        // if (reg.exec(node.tagName)) {
-        //   let cloneNode = node.cloneNode();
-        //   cloneNode.classList.add("navigator-item");
-        //   const a = document.createElement("a");
-        //   a.id = domId;
-        //   a.setAttribute("articleId", articleId);
-        //   a.innerHTML = node.innerText;
-        //   cloneNode.appendChild(a);
-        //   cloneNode.onclick = function () {
-        //     let parents = cloneNode.parentElement.children;
-        //     for (let j = 0; j < parents.length; j++) {
-        //       parents[j].classList.remove("active");
-        //     }
-        //     cloneNode.classList.add("active");
-        //     let id = this.children[0].id;
-        //     let articleId = this.children[0].getAttribute("articleId");
-        //     if (
-        //       location.hash ==
-        //       `#/article/${articleId}#${encodeURIComponent(id)}`
-        //     ) {
-        //       console.log("Re");
-        //       return;
-        //     }
-        //     let path = `/article/${articleId}#${id}`;
-        //     console.log(path);
-        //     router.replace({ path: path });
-        //   };
-        //   newDoms.push(cloneNode);
-        //   return cloneNode;
-        // }
-        // return "";
         let articleId = state.id;
         const reg = /^H[1-5]{1}$/;
         if (reg.exec(node.tagName)) {
@@ -216,22 +183,6 @@ export default defineComponent({
 
           a.innerHTML = node.innerText;
           cloneNode.appendChild(a);
-          // cloneNode.onclick = function () {
-          //   let parents = cloneNode.parentElement.children;
-          //   for (let j = 0; j < parents.length; j++) {
-          //     parents[j].classList.remove("active");
-          //   }
-          //   cloneNode.classList.add("active");
-          //   let id = this.children[0].id;
-          //   let articleId = this.children[0].getAttribute("articleId");
-          //   if (
-          //     location.hash ==
-          //     `#/article/${articleId}#${encodeURIComponent(id)}`
-          //   ) {
-          //     return;
-          //   }
-          //   router.replace({ path: `/article/${articleId}#${id}` });
-          // };
           newDoms.push(cloneNode);
 
           return cloneNode;
