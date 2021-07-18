@@ -35,6 +35,24 @@
 
 ## 预览
 
+#### 首页
+
+![首页](https://raw.githubusercontent.com/Memoyu/blog_app_vue/main/docs/images/首页.png)
+
+
+
+#### 文章详情
+
+![文章详情](https://raw.githubusercontent.com/Memoyu/blog_app_vue/main/docs/images/文章详情.png)
+
+#### 友链
+
+![友链](https://raw.githubusercontent.com/Memoyu/blog_app_vue/main/docs/images/友链.png)
+
+#### 留言
+
+![留言](https://raw.githubusercontent.com/Memoyu/blog_app_vue/main/docs/images/留言.png)
+
 &nbsp;
 
 ## 开源协议
