@@ -47,11 +47,11 @@
             class="aside-list"
             shadow="never"
             :body-style="{ padding: '12px' }"
-            :style="aside > 300?'position: fixed;top:30px;width:260px;':''"
+            :style="aside > 300 ? 'position: fixed;top:30px;width:260px;' : ''"
           >
-            <template v-slot:header >
+            <div>
               <span class="catalog">目录</span>
-            </template>
+            </div>
             <div id="navigation" class="wx_navigation" />
           </a-card>
         </a-col>
@@ -169,36 +169,71 @@ export default defineComponent({
         }
       }
       function judageH(node: any, i: number, domId: any) {
+        // let articleId = state.id;
+        // const reg = /^H[1-5]{1}$/;
+        // if (reg.exec(node.tagName)) {
+        //   let cloneNode = node.cloneNode();
+        //   cloneNode.classList.add("navigator-item");
+        //   const a = document.createElement("a");
+        //   a.id = domId;
+        //   a.setAttribute("articleId", articleId);
+        //   a.innerHTML = node.innerText;
+        //   cloneNode.appendChild(a);
+        //   cloneNode.onclick = function () {
+        //     let parents = cloneNode.parentElement.children;
+        //     for (let j = 0; j < parents.length; j++) {
+        //       parents[j].classList.remove("active");
+        //     }
+        //     cloneNode.classList.add("active");
+        //     let id = this.children[0].id;
+        //     let articleId = this.children[0].getAttribute("articleId");
+        //     if (
+        //       location.hash ==
+        //       `#/article/${articleId}#${encodeURIComponent(id)}`
+        //     ) {
+        //       console.log("Re");
+        //       return;
+        //     }
+        //     let path = `/article/${articleId}#${id}`;
+        //     console.log(path);
+        //     router.replace({ path: path });
+        //   };
+        //   newDoms.push(cloneNode);
+        //   return cloneNode;
+        // }
+        // return "";
         let articleId = state.id;
         const reg = /^H[1-5]{1}$/;
         if (reg.exec(node.tagName)) {
           let cloneNode = node.cloneNode();
+
           cloneNode.classList.add("navigator-item");
           const a = document.createElement("a");
+
           a.id = domId;
           a.setAttribute("articleId", articleId);
+           a.setAttribute("href", `/article/${articleId}#${cloneNode.id}`);
+
           a.innerHTML = node.innerText;
           cloneNode.appendChild(a);
-          cloneNode.onclick = function () {
-            let parents = cloneNode.parentElement.children;
-            for (let j = 0; j < parents.length; j++) {
-              parents[j].classList.remove("active");
-            }
-            cloneNode.classList.add("active");
-            let id = this.children[0].id;
-            let articleId = this.children[0].getAttribute("articleId");
-            if (
-              location.hash ==
-              `#/article/${articleId}#${encodeURIComponent(id)}`
-            ) {
-              console.log("Re");
-              return;
-            }
-            let path = `/article/${articleId}#${id}`;
-            console.log(path);
-            router.replace({ path: path });
-          };
+          // cloneNode.onclick = function () {
+          //   let parents = cloneNode.parentElement.children;
+          //   for (let j = 0; j < parents.length; j++) {
+          //     parents[j].classList.remove("active");
+          //   }
+          //   cloneNode.classList.add("active");
+          //   let id = this.children[0].id;
+          //   let articleId = this.children[0].getAttribute("articleId");
+          //   if (
+          //     location.hash ==
+          //     `#/article/${articleId}#${encodeURIComponent(id)}`
+          //   ) {
+          //     return;
+          //   }
+          //   router.replace({ path: `/article/${articleId}#${id}` });
+          // };
           newDoms.push(cloneNode);
+
           return cloneNode;
         }
         return "";
