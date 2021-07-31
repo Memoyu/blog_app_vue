@@ -70,7 +70,7 @@ import {
   nextTick,
 } from "vue";
 import { Icon } from "@/icon";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import Vditor from "vditor";
 import service from "@/api";
 import { ArticleDetailModel } from "@/models";
@@ -80,9 +80,8 @@ declare let document: Document | any;
 export default defineComponent({
   name: "ArticleDetail",
   components: { Icon },
-  setup(props) {
+  setup() {
     const route = useRoute();
-    const router = useRouter();
     const state = reactive({
       id: "0",
       articleDetail: {} as ArticleDetailModel,

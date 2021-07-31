@@ -1,6 +1,7 @@
 // url的链接
 export const article: any = {
     pages: "article/pages",
+    tagPages: "article/pages/tag/",
     detail: "article/"
 }
 
@@ -9,7 +10,8 @@ export const category: any = {
 }
 
 export const tag: any = {
-    all: "tag/all"
+    all: "tag/all",
+    detail: "tag/"
 }
 
 export const friendLink: any = {
