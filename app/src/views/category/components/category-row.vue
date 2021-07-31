@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { defineComponent ,PropType } from "vue";
-import TagListItem from "@/components/tag/tag-list-item.vue";
+import TagListItem from "@/views/tag/components/tag-list-item.vue";
 import { CategoryTotalModel } from "@/models";
 
 export default defineComponent({

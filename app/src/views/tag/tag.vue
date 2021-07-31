@@ -14,17 +14,15 @@
 
 <script lang="ts">
 import { defineComponent, reactive, onMounted, toRefs } from "vue";
-import TagList from "@/components/tag/tag-list.vue";
-import ArticleList from "@/components/article/article-list.vue";
-import TagRow from "@/components/tag/tag-row.vue";
+import ArticleList from "@/views/article/components/article-list.vue";
+import TagRow from "@/views/tag/components/tag-row.vue";
 import service from "@/api";
-import { article, tag } from "@/api/urls";
+import { tag } from "@/api/urls";
 import { TagTotalModel } from "@/models";
 
 export default defineComponent({
   name: "Tag",
   components: {
-    //TagList,
     ArticleList,
     TagRow
   },

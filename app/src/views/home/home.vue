@@ -50,10 +50,9 @@
 <script lang="ts">
 import { defineComponent, reactive, onMounted, toRefs } from "vue";
 import InfiniteLoading from "vue-infinite-loading";
-import ArticleList from "@/components/article/article-list.vue";
-import SiteInfoCard from "@/components/home/site-info-card.vue";
-import CategoryList from "@/components/category/category-list.vue";
-import TagList from "@/components/tag/tag-list.vue";
+import ArticleList from "@/views/article/components/article-list.vue";
+import SiteInfoCard from "@/views/home/components/site-info-card.vue";
+import TagList from "@/views/home/components/tag-list.vue";
 import service from "@/api";
 import { article, category, tag, monitor } from "@/api/urls";
 import {
@@ -70,7 +69,6 @@ export default defineComponent({
   components: {
     ArticleList,
     SiteInfoCard,
-    // CategoryList,
     TagList,
     InfiniteLoading,
   },
@@ -118,9 +116,9 @@ export default defineComponent({
       );
       let all = {
         id: 0,
-        name: '全部'
-      } as CategoryTotalModel
-      data.unshift(all)
+        name: "全部",
+      } as CategoryTotalModel;
+      data.unshift(all);
       state.categories = data;
     };
 
@@ -215,7 +213,7 @@ export default defineComponent({
       list-style: none;
       &:hover {
         background: rgba(0, 0, 0, 0.07);
-        cursor: pointer; 
+        cursor: pointer;
       }
       &.active {
         border-bottom: 2px solid #ec7259;

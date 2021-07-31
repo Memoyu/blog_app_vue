@@ -9,8 +9,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SendMessage from "@/components/message/send-message.vue";
-import MessageList from "@/components/message/message-list.vue";
+import SendMessage from "@/views/message/components/send-message.vue";
+import MessageList from "@/views/message/components/message-list.vue";
 
 export default defineComponent({
   name: "MessageBoard",

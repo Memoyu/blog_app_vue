@@ -27,6 +27,9 @@
       "@/components/*": [
         "src/components/*"
       ],
+      "@/views/*": [
+        "src/views/*"
+      ],
       "@/store/*": [
         "src/store/*"
       ],

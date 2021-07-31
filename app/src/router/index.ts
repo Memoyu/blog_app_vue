@@ -36,11 +36,6 @@ const routes: Array<RouteRecordRaw> = [
     component: Message
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
-  },
-  {
     path: '/article/:id',
     name: 'Article',
     component: Article

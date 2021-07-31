@@ -14,11 +14,10 @@
 
 <script lang="ts">
 import { defineComponent, reactive, onMounted, toRefs } from "vue";
-import CategoryList from "@/components/category/category-list.vue";
-import CategoryRow from "@/components/category/category-row.vue";
-import ArticleList from "@/components/article/article-list.vue";
+import CategoryRow from "./components/category-row.vue";
+import ArticleList from "@/views/article/components/article-list.vue";
 import service from "@/api";
-import { article, category } from "@/api/urls";
+import { category } from "@/api/urls";
 import { CategoryTotalModel } from "@/models";
 
 export default defineComponent({

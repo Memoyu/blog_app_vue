@@ -13,8 +13,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted } from "vue";
-import FriendRow from "@/components/friend/friend-row.vue";
-import RecommendRow from "@/components/friend/recommend-row.vue";
+import FriendRow from "@/views/friend/components/friend-row.vue";
+import RecommendRow from "@/views/friend/components/recommend-row.vue";
 import { FriendLinkModel } from "@/models";
 import service from "@/api";
 import { friendLink } from "@/api/urls";

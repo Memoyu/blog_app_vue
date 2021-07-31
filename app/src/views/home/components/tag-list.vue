@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, reactive, toRefs } from "vue";
-import TagListItem from "./tag-list-item.vue";
+import TagListItem from "@/views/tag/components/tag-list-item.vue";
 import { TagTotalModel } from "@/models";
 
 export default defineComponent({
