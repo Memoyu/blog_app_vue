@@ -29,6 +29,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .articles-comp{
-  padding: 10px;
+  padding-top: 10px;
 }
 </style>

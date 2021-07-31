@@ -1,34 +1,49 @@
 <template>
   <div class="main-container warp">
-    <a-row class="row-bg" :gutter="20">
-      <a-col :xs="24" :md="17">
-        <article-list :articles="articleItems" />
-        <infinite-loading
-          @infinite="handleInfiniteLoad"
-          spinner="bubbles"
-          :identifier="any"
+    <div class="category-nav card-border-radius">
+      <ul class="nav-list">
+        <li
+          v-for="(item, index) in categories"
+          v-bind:key="index"
+          :class="{ active: categoryId == item.id }"
+          @click="handleCategory(item.id)"
+          class="nav-item"
         >
-          <template v-slot:no-more>
-           <a-divider >我也是有底线的...</a-divider>
-          </template>
-        </infinite-loading>
-      </a-col>
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <a-row class="row-bg" :gutter="20">
+        <a-col :xs="24" :md="17">
+          <article-list :articles="articleItems" />
+          <infinite-loading
+            @infinite="handleInfiniteLoad"
+            spinner="bubbles"
+            :identifier="any"
+          >
+            <template v-slot:no-more>
+              <a-divider>我也是有底线的...</a-divider>
+            </template>
+          </infinite-loading>
+        </a-col>
 
-      <a-col :xs="24" :md="7">
-        <div>
-          <div class="right-card-title">分类</div>
-          <category-list :categories="categories" />
-        </div>
-        <div>
-          <div class="right-card-title">标签</div>
-          <tag-list :tags="tags" />
-        </div>
-        <div>
-          <div class="right-card-title">本站信息</div>
-          <site-info-card :infos="infos" />
-        </div>
-      </a-col>
-    </a-row>
+        <a-col :xs="24" :md="7">
+          <!-- <div>
+            <div class="right-card-title">分类</div>
+            <category-list :categories="categories" />
+          </div> -->
+          <div>
+            <div class="right-card-title">标签</div>
+            <tag-list :tags="tags" />
+          </div>
+          <div>
+            <div class="right-card-title">本站信息</div>
+            <site-info-card :infos="infos" />
+          </div>
+        </a-col>
+      </a-row>
+    </div>
   </div>
 </template>
 
@@ -55,7 +70,7 @@ export default defineComponent({
   components: {
     ArticleList,
     SiteInfoCard,
-    CategoryList,
+    // CategoryList,
     TagList,
     InfiniteLoading,
   },
@@ -69,7 +84,7 @@ export default defineComponent({
         title: "",
         author: "",
         isTop: "",
-        category: 0,
+        categoryId: 0,
         createTimeStart: "",
         createTimeEnd: "",
         page: 1,
@@ -79,6 +94,7 @@ export default defineComponent({
       loading: false,
       any: new Date(),
       total: 0,
+      categoryId: 0,
     });
 
     onMounted(() => {
@@ -100,12 +116,20 @@ export default defineComponent({
         category.all,
         {}
       );
+      let all = {
+        id: 0,
+        name: '全部'
+      } as CategoryTotalModel
+      data.unshift(all)
       state.categories = data;
     };
 
-    const handleLoadTag = async (): Promise<void> => {
-      const data: Array<TagTotalModel> = await service.get(tag.all, {});
-      state.tags = data;
+    const handleCategory = async (id: number): Promise<void> => {
+      state.categoryId = id;
+      state.params.page = 1;
+      state.params.categoryId = id;
+      var data = await handleLoadArticle();
+      state.articleItems = [...data.items];
     };
 
     const handleBaseInfo = async (): Promise<void> => {
@@ -148,6 +172,11 @@ export default defineComponent({
       state.loading = false;
     };
 
+    const handleLoadTag = async (): Promise<void> => {
+      const data: Array<TagTotalModel> = await service.get(tag.all, {});
+      state.tags = data;
+    };
+
     return {
       ...toRefs(state),
       handleLoadArticle,
@@ -155,12 +184,46 @@ export default defineComponent({
       handleLoadTag,
       handleBaseInfo,
       handleInfiniteLoad,
+      handleCategory,
     };
   },
 });
 </script>
 
 <style lang="scss">
+.category-nav {
+  overflow-x: auto;
+  background: white;
+  height: 50px;
+  margin-bottom: 20px;
+  .nav-list {
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    .nav-item {
+      height: 50%;
+      align-items: center;
+      display: flex;
+      flex-shrink: 0;
+      color: #71777c;
+      padding: 0 0.5rem;
+    }
+
+    li {
+      list-style: none;
+      &:hover {
+        background: rgba(0, 0, 0, 0.07);
+        cursor: pointer; 
+      }
+      &.active {
+        border-bottom: 2px solid #ec7259;
+      }
+    }
+  }
+}
+
 .right-card-title {
   font-size: 15px;
   text-align: center;
@@ -169,11 +232,11 @@ export default defineComponent({
   margin-bottom: 10px;
   border-bottom: 3px solid #ec7259;
 }
-.ant-divider-horizontal.ant-divider-with-text-center::before{
-  border-top:1px solid #ec7259 !important;
+.ant-divider-horizontal.ant-divider-with-text-center::before {
+  border-top: 1px solid #ec7259 !important;
 }
-.ant-divider-horizontal.ant-divider-with-text-center::after{
-  border-top:1px solid #ec7259 !important;
+.ant-divider-horizontal.ant-divider-with-text-center::after {
+  border-top: 1px solid #ec7259 !important;
 }
 </style>
 
