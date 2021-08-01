@@ -1,7 +1,7 @@
 <template>
   <div class="tag-item-comp">
     <div class="tag-container">
-      <a class="x-start link-none-line" href="">
+      <a class="x-start link-none-line" :href="`/tag/${tag.id}`">
         <span :class="['tag', size, 'tag-name']">{{ tag.name }}</span>
         <span :class="['tag', size, 'tag-total']">{{ tag.total }}</span>
       </a>

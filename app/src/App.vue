@@ -33,6 +33,7 @@ export default defineComponent({
 
 <style lang="scss">
 body {
+  font-family: "CascadiaCode" !important;
   background: url("./assets/images/background.png");
 }
 #app {

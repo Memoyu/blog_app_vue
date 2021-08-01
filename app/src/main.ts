@@ -7,6 +7,7 @@ import 'animate.min.css';
 import 'ant-design-vue/dist/antd.css';
 import '@/assets/styles/_common.scss';
 import '@/assets/styles/_utils.scss';
+import '@/assets/styles/font.scss';
 
 const app = createApp(App)
 app.use(Antd)

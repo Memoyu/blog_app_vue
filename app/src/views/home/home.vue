@@ -96,7 +96,7 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      // handleLoadArticle();
+      // handleLoadArticle() ;
       handleLoadCategory();
       handleLoadTag();
       handleBaseInfo();
@@ -190,6 +190,7 @@ export default defineComponent({
 
 <style lang="scss">
 .category-nav {
+  font-size: 15px;
   overflow-x: auto;
   background: white;
   height: 50px;

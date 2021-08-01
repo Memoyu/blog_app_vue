@@ -2,7 +2,7 @@
   <footer>
     <div class="foot-text">
       <span class="base">
-        Prower By &nbsp;&nbsp;
+        Prower By
         <a
           class="green"
           href="https://github.com/dotnet/aspnetcore"
@@ -15,7 +15,7 @@
         >
       </span>
       <span>
-        © {{ year }} &nbsp;&nbsp;Memoyu 
+        © {{ year }} &nbsp;Memoyu 
         <a href="https://github.com/Memoyu" target="_blank" class="link">
           <icon class="icon" icon="GithubOutlined" />
         </a>

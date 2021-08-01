@@ -1,10 +1,19 @@
 <template>
   <div>
-    <div class="header-menu article-detail-header x-c">
+    <img
+      class="article-detail-header"
+      src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb"
+    />
+    <div class="header-menu x-c">
       <div class="header-content y-f">
         <span class="title">{{ articleDetail.title }}</span>
         <div class="meta">
           <span>
+            <icon icon="UserOutlined" />
+            作者
+            {{ articleDetail.user.name }}
+          </span>
+          <span class="item">
             <icon icon="ClockCircleOutlined" />
             发表于
             {{ articleDetail.createTime }}
@@ -84,7 +93,9 @@ export default defineComponent({
     const route = useRoute();
     const state = reactive({
       id: "0",
-      articleDetail: {} as ArticleDetailModel,
+      articleDetail: {
+        user: {},
+      } as ArticleDetailModel,
       aside: 0,
       scroll: 0,
       heightArr: [] as number[],
@@ -178,7 +189,7 @@ export default defineComponent({
 
           a.id = domId;
           a.setAttribute("articleId", articleId);
-           a.setAttribute("href", `/article/${articleId}#${cloneNode.id}`);
+          a.setAttribute("href", `/article/${articleId}#${cloneNode.id}`);
 
           a.innerHTML = node.innerText;
           cloneNode.appendChild(a);
@@ -265,12 +276,18 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "~vditor/dist/index.css";
 .article-detail-header {
+  z-index: -99;
+  top: 0;
+  display: block;
+  position: absolute;
+  height: 50%;
+  width: 100%;
+}
+.header-menu {
   height: 300px;
-  background: url("https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb");
-  background-size: 100% 100%;
-
   .header-content {
     .title {
+      text-align: center;
       color: white;
       font-size: 30px;
       font-weight: bold;
@@ -298,6 +315,9 @@ export default defineComponent({
   background-color: #fff;
   overflow: hidden;
   color: #303133;
+}
+.vditor-reset {
+  font-family: "CascadiaCode" !important;
 }
 #article /deep/ {
   color: #24292e;
