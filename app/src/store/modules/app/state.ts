@@ -1,7 +1,9 @@
 export interface AppState {
-  showAboutMe: boolean
+  showAboutMe: boolean,
+  showLogin: boolean
 }
 
 export const state: AppState = {
-  showAboutMe: false
+  showAboutMe: false,
+  showLogin: false
 }

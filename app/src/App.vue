@@ -7,6 +7,7 @@
       <core-footer />
     </section>
     <core-about-me-drawer />
+    <login/>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import { defineComponent,reactive,toRefs } from "vue";
 import CoreHeaderNav from "@/components/core/core-header-nav.vue";
 import CoreFooter from "@/components/core/core-footer.vue";
 import CoreAboutMeDrawer from "@/components/core/core-about-me-drawer.vue";
+import Login from "@/views/user/login.vue";
 
 export default defineComponent({
   name: "App",
@@ -22,6 +24,7 @@ export default defineComponent({
     CoreHeaderNav,
     CoreFooter,
     CoreAboutMeDrawer,
+    Login
   },
   setup() {
     const state = reactive({

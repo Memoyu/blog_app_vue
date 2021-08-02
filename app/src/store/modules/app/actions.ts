@@ -12,19 +12,13 @@ type AugmentedActionContext = {
   } & Omit<ActionContext<AppState, RootState>, 'commit'>
 
 export interface Actions {
-    [AppActionTypes.ACTION_SHOW_ABOUT_ME](
-        { commit }: AugmentedActionContext
-    ): void
-    [AppActionTypes.ACTION_HIDE_ABOUT_ME](
+    [AppActionTypes.TEST](
         { commit }: AugmentedActionContext
     ): void
 }
 
 export const actions: ActionTree<AppState, RootState> & Actions = {
-    [AppActionTypes.ACTION_SHOW_ABOUT_ME]({ commit }) {
-        commit(AppMutationTypes.CONTROL_ABOUT_ME, true)
-    },
-    [AppActionTypes.ACTION_HIDE_ABOUT_ME]({ commit }) {
-        commit(AppMutationTypes.CONTROL_ABOUT_ME, false)
+    [AppActionTypes.TEST]({ commit }) {
+        // commit(AppMutationTypes.TEST, true)
     }
 }

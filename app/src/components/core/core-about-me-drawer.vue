@@ -40,7 +40,7 @@
     </div>
 
     <div class="x-ac about-top">
-      <a-button type="primary" shape="circle" @click="closeAboutMe">
+      <a-button type="primary" shape="circle" @click="handlerCloseAboutMe">
         <template #icon>
           <icon style="font-weight: bold" icon="CloseOutlined"></icon>
         </template>
@@ -53,7 +53,7 @@
 import { computed, reactive, ref, toRefs, defineComponent } from "vue";
 import { useStore } from "@/store";
 import { Icon } from "@/icon.ts";
-import { AppActionTypes } from "@/store/modules/app/types";
+import { AppMutationTypes } from "@/store/modules/app/types";
 
 export default defineComponent({
   components: { Icon },
@@ -66,15 +66,15 @@ export default defineComponent({
       return store.state.app.showAboutMe;
     });
     const state = reactive({});
-    const closeAboutMe = () => {
-      store.dispatch(AppActionTypes.ACTION_HIDE_ABOUT_ME);
+    const handlerCloseAboutMe = () => {
+      store.commit(AppMutationTypes.CONTROL_ABOUT_ME, false);
     };
 
     return {
       isShowAboutMe,
       introduction,
       ...toRefs(state),
-      closeAboutMe,
+      handlerCloseAboutMe,
     };
   },
 });

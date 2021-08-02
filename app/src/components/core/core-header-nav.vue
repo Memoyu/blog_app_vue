@@ -3,7 +3,7 @@
     <div class="header">
       <div class="header-menu menu">
         <div class="content-center">
-          <div class="title-container content-center" @click="controlAboutMe">
+          <div class="title-container content-center" @click="handlerControlAboutMe">
             <img class="logo" src="@/assets/icons/logo.png" alt />
             <div class="title">
               <span>Memoyu</span>
@@ -15,28 +15,24 @@
             v-for="(item, index) in nav"
             :key="index"
             :class="{ active: $route.path == item.url }"
-            @click="goRouter(item.url)"
+            @click="handlerGoRouter(item.url)"
           >
             <a>{{ item.name }}</a>
           </li>
         </div>
         <div class="x-c">
-          <a-input-search
-            class="none-border"
-            placeholder="search"
-            style="width: 200px"
-            @search="onSearch"
-          />
+          <a-button type="primary" @click="handlerLogin">登录</a-button>
         </div>
       </div>
     </div>
   </header>
 </template>
 
-<script>
+<script lang="ts">
 import { computed, reactive, toRefs, defineComponent } from "vue";
 import { useStore } from "@/store";
-import { AppActionTypes } from "@/store/modules/app/types";
+import { useRouter } from "vue-router";
+import { AppActionTypes, AppMutationTypes } from "@/store/modules/app/types";
 
 export default defineComponent({
   props: {
@@ -51,6 +47,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
     const nav = [
       { name: "首页", url: "/", icon: "ios-book" },
       // { name: "分类", url: "/category", icon: "logo-octocat" },
@@ -62,25 +59,26 @@ export default defineComponent({
       return store.state.app.showAboutMe;
     });
     const state = reactive({
-      goRouter(item) {
-        // 当有选择标签或者分类时点击博客自动选择
-        this.$router.push({ path: item });
-      },
-      controlAboutMe() {
-        if (isShowAboutMe.value) {
-          store.dispatch(AppActionTypes.ACTION_HIDE_ABOUT_ME);
-        } else {
-          store.dispatch(AppActionTypes.ACTION_SHOW_ABOUT_ME);
-        }
-      },
-      onSearch() {
-        console.log("Search")
-      }
     });
+
+    const handlerGoRouter = async (item: any): Promise<void> => {
+      // 当有选择标签或者分类时点击博客自动选择
+      router.push({ path: item });
+    };
+    const handlerControlAboutMe = async (): Promise<void> => {
+      store.commit(AppMutationTypes.CONTROL_ABOUT_ME, !isShowAboutMe.value);
+    };
+
+    const handlerLogin = async (): Promise<void> => {
+      store.commit(AppMutationTypes.CONTROL_LOGIN, true);
+    };
 
     return {
       nav,
       ...toRefs(state),
+      handlerGoRouter,
+      handlerControlAboutMe,
+      handlerLogin,
     };
   },
 });
