@@ -3,7 +3,10 @@
     <div class="header">
       <div class="header-menu menu">
         <div class="content-center">
-          <div class="title-container content-center" @click="handlerControlAboutMe">
+          <div
+            class="title-container content-center"
+            @click="handlerControlAboutMe"
+          >
             <img class="logo" src="@/assets/icons/logo.png" alt />
             <div class="title">
               <span>Memoyu</span>
@@ -21,7 +24,7 @@
           </li>
         </div>
         <div class="x-c">
-          <a-button type="primary" @click="handlerLogin">登录</a-button>
+          <user-avatar @click="handlerLogin" />
         </div>
       </div>
     </div>
@@ -32,9 +35,11 @@
 import { computed, reactive, toRefs, defineComponent } from "vue";
 import { useStore } from "@/store";
 import { useRouter } from "vue-router";
-import { AppActionTypes, AppMutationTypes } from "@/store/modules/app/types";
+import { AppMutationTypes } from "@/store/modules/app/types";
+import UserAvatar from "@/components/layout/user-avatar.vue";
 
 export default defineComponent({
+  components: { UserAvatar },
   props: {
     show: {
       type: Boolean,
@@ -58,8 +63,7 @@ export default defineComponent({
     const isShowAboutMe = computed(() => {
       return store.state.app.showAboutMe;
     });
-    const state = reactive({
-    });
+    const state = reactive({});
 
     const handlerGoRouter = async (item: any): Promise<void> => {
       // 当有选择标签或者分类时点击博客自动选择

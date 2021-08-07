@@ -9,39 +9,14 @@
               ><icon icon="CloseOutlined"></icon
             ></span>
             <p class="title">欢迎登录</p>
+            <div class="alert">
+              <span>目前只支持如下第三方账户登录哦！</span>
+            </div>
             <div class="mode">
-              <span class="item qq" title="QQ" @click="handlerpartyLogin('qq')">
-                <icon icon="QqOutlined"></icon>
-              </span>
-              <span
-                class="item github"
-                title="GitHub"
-                @click="handlerpartyLogin('github')"
-              >
+              <span class="item github" @click="handlerpartyLogin('github')">
                 <icon icon="GithubOutlined"></icon>
               </span>
-              <span
-                class="item gitee"
-                title="Gitee"
-                @click="handlerpartyLogin('gitee')"
-              >
-                <svg
-                  t="1607925359875"
-                  class="icon"
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="2562"
-                  width="24"
-                  height="24"
-                  fill="currentcolor"
-                >
-                  <path
-                    d="M512 1024C230.4 1024 0 793.6 0 512S230.4 0 512 0s512 230.4 512 512-230.4 512-512 512z m259.2-569.6H480c-12.8 0-25.6 12.8-25.6 25.6v64c0 12.8 12.8 25.6 25.6 25.6h176c12.8 0 25.6 12.8 25.6 25.6v12.8c0 41.6-35.2 76.8-76.8 76.8h-240c-12.8 0-25.6-12.8-25.6-25.6V416c0-41.6 35.2-76.8 76.8-76.8h355.2c12.8 0 25.6-12.8 25.6-25.6v-64c0-12.8-12.8-25.6-25.6-25.6H416c-105.6 0-188.8 86.4-188.8 188.8V768c0 12.8 12.8 25.6 25.6 25.6h374.4c92.8 0 169.6-76.8 169.6-169.6v-144c0-12.8-12.8-25.6-25.6-25.6z"
-                    p-id="2563"
-                  ></path>
-                </svg>
-              </span>
+
             </div>
           </div>
         </div>
@@ -53,13 +28,13 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, computed } from "vue";
 import { useStore } from "@/store";
-import { Icon } from "@/icon.ts";
+import { Icon } from "@/icon";
 import { AppMutationTypes } from "@/store/modules/app/types";
 
 export default defineComponent({
   name: "Login",
   components: {
-      Icon
+    Icon,
   },
   setup() {
     const store = useStore();
@@ -70,8 +45,8 @@ export default defineComponent({
 
     const handlerpartyLogin = async (party: string): Promise<void> => {
       console.log(party);
-    }; 
-    
+    };
+
     const handlerCloseLogin = async (): Promise<void> => {
       store.commit(AppMutationTypes.CONTROL_LOGIN, false);
     };
@@ -112,10 +87,20 @@ export default defineComponent({
     align-items: center;
     justify-content: center;
 
+    .concise {
+      padding: 40px 32px;
+      border-radius: 20px;
+      margin-top: 10px;
+      /* box-shadow: 0 0px 25px 5px rgba(46, 58, 89, 0.1); */
+      box-sizing: border-box;
+      background-color: #fff;
+      transition: box-shadow 0.3s;
+    }
+
     .login {
       width: 430px;
       box-shadow: 0 0px 25px 5px rgba(46, 58, 89, 0.1);
-      background: linear-gradient(180deg, #dcf4ff, #f4fcff);
+      // background: linear-gradient(180deg, #dcf4ff, #f4fcff);
       position: relative;
 
       &:hover {
@@ -148,19 +133,19 @@ export default defineComponent({
       }
 
       .alert {
-        margin-bottom: 16px;
         box-sizing: border-box;
         margin: 0;
         color: rgba(0, 0, 0, 0.65);
-        font-size: 14px;
+        font-size: 15px;
         font-variant: tabular-nums;
         line-height: 1.5715;
         list-style: none;
-        font-feature-settings: 'tnum';
+        font-feature-settings: "tnum";
         position: relative;
-        padding: 8px 15px 8px 37px;
+        padding: 18px 0px;
+        text-align: center;
         word-wrap: break-word;
-        border-radius: 20px;
+        border-radius: 12px;
         background-color: #fffbe6;
         position: relative;
 
@@ -183,16 +168,15 @@ export default defineComponent({
           align-items: center;
           width: 48px;
           height: 48px;
-          border: 2px solid #efefef;
           border-radius: 50%;
-          font-size: 24px;
+          font-size: 30px;
           margin: 10px;
           transition: all 0.3s;
           cursor: pointer;
         }
 
         .qq {
-          color: #7bd4ef;
+          color: #12b7f5;
 
           &:hover {
             background: rgba(123, 212, 239, 0.4);
@@ -222,11 +206,13 @@ export default defineComponent({
   }
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.5s ease;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
