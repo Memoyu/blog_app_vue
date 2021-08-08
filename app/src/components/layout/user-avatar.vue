@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <a-dropdown @command="handleCommand">
+    <a-dropdown placement="bottomRight">
       <span class="a-dropdown-link">
         <div class="nav-avatar">
           <img src="../../assets/images/user/user.png" alt="头像" />
@@ -9,29 +9,29 @@
       <template #overlay>
         <a-menu class="user-box">
           <div class="user-info">
-            <div class="avatar" title="点击修改头像">
+            <div class="avatar">
               <img src="../../assets/images/user/user.png" alt="头像" />
             </div>
             <div class="text">
               <div
                 class="username"
-                @click="changeNickname"
+                @click="handlerChangeNickname"
                 v-if="!nicknameChanged"
               >
-                {{ user.nickname }}
+                {{ nickname }}
               </div>
               <a-input
                 placeholder="请输入内容"
                 size="small"
                 v-else
                 v-model="nickname"
-                ref="input"
-                @blur="blur"
+                ref="inputRef"
+                @blur="handlerBlur"
               ></a-input>
             </div>
             <img src="../../assets/images/user/corner.png" class="corner" />
             <div class="info">
-              <div class="username">{{ user.username }}</div>
+              <div class="username">{{ username }}</div>
             </div>
           </div>
           <a-menu-item> <icon icon="UserOutlined" />我的主页</a-menu-item>
@@ -45,7 +45,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, PropType } from "vue";
+import {
+  defineComponent,
+  ref,
+  onMounted,
+  reactive,
+  toRefs,
+  PropType,
+} from "vue";
 import { Icon } from "@/icon";
 
 export default defineComponent({
@@ -54,19 +61,37 @@ export default defineComponent({
     user: {
       type: Object as PropType<any>,
       default: () => {
-        return {
-          nickname: "memoyu",
-          username: "memoyu",
-        };
+        return {};
       },
     },
   },
   setup() {
+    const inputRef = ref<HTMLElement | null>(null);
     const state = reactive({
-      defaultAvatar: "@/assets/images/user/user.png",
+      nicknameChanged: false,
+      nickname: "memoyu",
+      username: "memoyu",
     });
+    onMounted(() => {
+      console.log(inputRef.value);
+    });
+
+    const handlerChangeNickname = async (): Promise<void> => {
+      state.nicknameChanged = true;
+      console.log(inputRef.value);
+      setTimeout(() => {
+       // inputRef.value?.focus();
+      }, 200);
+    };
+
+    const handlerBlur = async () : Promise<void> =>{
+      state.nicknameChanged = false;
+    };
     return {
+      inputRef,
       ...toRefs(state),
+      handlerChangeNickname,
+      handlerBlur,
     };
   },
 });
@@ -75,9 +100,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .user {
   height: 40px;
-  .ant-dropdown {
-    top: 89px !important;
-  }
   .a-dropdown-link {
     cursor: pointer;
 

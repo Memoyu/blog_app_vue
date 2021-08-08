@@ -24,7 +24,10 @@
           </li>
         </div>
         <div class="x-c">
-          <user-avatar @click="handlerLogin" />
+          <div v-if="!isLogin" class="default-avatar"  @click="handlerLogin" >
+            <img src="../../assets/images/user/user.png" alt="头像" />
+          </div>
+          <user-avatar v-else-if="isLogin"/>
         </div>
       </div>
     </div>
@@ -60,6 +63,11 @@ export default defineComponent({
       { name: "友链", url: "/friend", icon: "logo-octocat" },
       { name: "留言", url: "/message", icon: "md-chatboxes" },
     ];
+
+    const isLogin = computed(() => {
+      return store.state.app.isLogin;
+    });
+
     const isShowAboutMe = computed(() => {
       return store.state.app.showAboutMe;
     });
@@ -79,6 +87,7 @@ export default defineComponent({
 
     return {
       nav,
+      isLogin,
       ...toRefs(state),
       handlerGoRouter,
       handlerControlAboutMe,
@@ -98,6 +107,16 @@ export default defineComponent({
   margin-top: 20px;
   .menu {
     background: #fff;
+    .default-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 10px;
+      img {
+        width: 100%;
+      }
+    }
 
     padding: 0 20px;
     .title-container {

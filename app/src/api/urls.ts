@@ -1,4 +1,8 @@
 // url的链接
+export const oauth2: any = {
+    all: "oauth2/signin"
+}
+
 export const article: any = {
     pages: "article/pages",
     tagPages: "article/pages/tag/",

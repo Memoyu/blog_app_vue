@@ -13,10 +13,9 @@
               <span>目前只支持如下第三方账户登录哦！</span>
             </div>
             <div class="mode">
-              <span class="item github" @click="handlerpartyLogin('github')">
+              <span class="item github" @click="handlerPartyLogin('GitHub')">
                 <icon icon="GithubOutlined"></icon>
               </span>
-
             </div>
           </div>
         </div>
@@ -43,8 +42,11 @@ export default defineComponent({
       return store.state.app.showLogin;
     });
 
-    const handlerpartyLogin = async (party: string): Promise<void> => {
-      console.log(party);
+    const handlerPartyLogin = async (provider: string): Promise<void> => {
+        window.localStorage.setItem("OAUTH_LOGIN_URL", window.location.href);
+        window.open(
+          `${process.env.VUE_APP_BASE_URL}/oauth2/signin?provider=${provider}&redirectUrl=${process.env.VUE_APP_CURRENT_URL}`
+        );
     };
 
     const handlerCloseLogin = async (): Promise<void> => {
@@ -55,7 +57,7 @@ export default defineComponent({
       isShowLogin,
       ...toRefs(state),
       handlerCloseLogin,
-      handlerpartyLogin,
+      handlerPartyLogin,
     };
   },
 });
