@@ -1,10 +1,11 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/home/home.vue'
 import Tag from '../views/tag/tag.vue'
 import Friend from '../views/friend/friend.vue'
 import Message from '../views/message/message.vue'
 import Article from '../views/article/article-detail.vue'
 import UserArticle from '../views/user/user-article.vue'
+import LoginResult from '../views/user/login-result.vue'
 import Test from '../views/test.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -39,14 +40,20 @@ const routes: Array<RouteRecordRaw> = [
     component: UserArticle
   },
   {
+    path: '/login-result',
+    name: 'LoginResult',
+    component: LoginResult
+  },
+  {
     path: '/test',
     name: 'Test',
     component: Test
   }
 ]
 
+
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes
 })
 

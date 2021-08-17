@@ -24,7 +24,7 @@
           </li>
         </div>
         <div class="x-c">
-          <div v-if="!isLogin" class="default-avatar"  @click="handlerLogin" >
+          <div v-if="!isLogin" class="default-avatar" @click="handlerLogin">
             <img src="../../assets/images/user/user.png" alt="头像" />
           </div>
           <user-avatar v-else-if="isLogin"/>
@@ -65,6 +65,7 @@ export default defineComponent({
     ];
 
     const isLogin = computed(() => {
+      console.log(store.state.app.isLogin)
       return store.state.app.isLogin;
     });
 

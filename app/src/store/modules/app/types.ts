@@ -1,8 +1,10 @@
 export enum AppActionTypes {
-    TEST = 'TEST',
+    ACTION_SET_USER_AND_STATUS = 'ACTION_SET_USER_AND_STATUS',
 }
 
 export enum AppMutationTypes {
     CONTROL_ABOUT_ME = 'CONTROL_ABOUT_ME',
     CONTROL_LOGIN = 'CONTROL_LOGIN',
+    SET_LOGIN_STATUS = 'SET_LOGIN_STATUS',
+    SET_USER = 'SET_USER',
 }

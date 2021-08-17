@@ -5,7 +5,6 @@ import {
     Module
   } from 'vuex'
   
-  // TODO: How to surpass cyclical dependency linting errors cleanly?
   import { RootState } from '@/store'
   import { state } from './state'
   import { mutations, Mutations } from './mutations'

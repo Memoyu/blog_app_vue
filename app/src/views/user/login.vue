@@ -27,6 +27,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, computed } from "vue";
 import { useStore } from "@/store";
+import { useRoute } from "vue-router";
 import { Icon } from "@/icon";
 import { AppMutationTypes } from "@/store/modules/app/types";
 
@@ -37,16 +38,16 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const route = useRoute();
     const state = reactive({});
     const isShowLogin = computed(() => {
       return store.state.app.showLogin;
     });
 
     const handlerPartyLogin = async (provider: string): Promise<void> => {
-        window.localStorage.setItem("OAUTH_LOGIN_URL", window.location.href);
-        window.open(
-          `${process.env.VUE_APP_BASE_URL}/oauth2/signin?provider=${provider}&redirectUrl=${process.env.VUE_APP_CURRENT_URL}`
-        );
+      window.localStorage.setItem("OAUTH_LOGIN_URL", route.path);
+      var url = `${process.env.VUE_APP_BASE_URL}oauth2/signin?provider=${provider}&redirectUrl=${process.env.VUE_APP_CURRENT_URL}`;
+      window.location.href = url;
     };
 
     const handlerCloseLogin = async (): Promise<void> => {

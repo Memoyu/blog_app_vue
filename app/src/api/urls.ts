@@ -3,6 +3,10 @@ export const oauth2: any = {
     all: "oauth2/signin"
 }
 
+export const account: any = {
+    detail: "account"
+}
+
 export const article: any = {
     pages: "article/pages",
     tagPages: "article/pages/tag/",

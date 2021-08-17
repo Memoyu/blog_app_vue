@@ -189,7 +189,7 @@ export default defineComponent({
 
           a.id = domId;
           a.setAttribute("articleId", articleId);
-          a.setAttribute("href", `/article/${articleId}#${cloneNode.id}`);
+          a.setAttribute("href", `#/article/${articleId}#${cloneNode.id}`);
 
           a.innerHTML = node.innerText;
           cloneNode.appendChild(a);

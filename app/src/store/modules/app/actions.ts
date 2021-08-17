@@ -3,6 +3,7 @@ import { ActionTree, ActionContext } from 'vuex'
 import { AppActionTypes,  AppMutationTypes} from './types'
 import { Mutations } from './mutations'
 import { AppState } from './state'
+import { UserModel } from '@/models'
 
 type AugmentedActionContext = {
     commit<K extends keyof Mutations>(
@@ -12,13 +13,14 @@ type AugmentedActionContext = {
   } & Omit<ActionContext<AppState, RootState>, 'commit'>
 
 export interface Actions {
-    [AppActionTypes.TEST](
-        { commit }: AugmentedActionContext
+    [AppActionTypes.ACTION_SET_USER_AND_STATUS](
+        { commit }: AugmentedActionContext, user: UserModel
     ): void
 }
 
 export const actions: ActionTree<AppState, RootState> & Actions = {
-    [AppActionTypes.TEST]({ commit }) {
-        // commit(AppMutationTypes.TEST, true)
+    [AppActionTypes.ACTION_SET_USER_AND_STATUS]({ commit }, user: UserModel) {
+        commit(AppMutationTypes.SET_LOGIN_STATUS, true)
+        commit(AppMutationTypes.SET_USER, user)
     }
 }

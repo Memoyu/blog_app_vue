@@ -3,14 +3,14 @@
     <a-dropdown placement="bottomRight">
       <span class="a-dropdown-link">
         <div class="nav-avatar">
-          <img src="../../assets/images/user/user.png" alt="头像" />
+          <img :src="user.avatarUrl || defaultAvatar" alt="头像" />
         </div>
       </span>
       <template #overlay>
         <a-menu class="user-box">
           <div class="user-info">
             <div class="avatar">
-              <img src="../../assets/images/user/user.png" alt="头像" />
+              <img :src="user.avatarUrl || defaultAvatar" alt="头像" />
             </div>
             <div class="text">
               <div
@@ -50,44 +50,52 @@ import {
   ref,
   onMounted,
   reactive,
-  toRefs,
-  PropType,
+  computed,
+  toRefs
 } from "vue";
 import { Icon } from "@/icon";
+import { useStore } from "@/store";
 
 export default defineComponent({
   components: { Icon },
-  props: {
-    user: {
-      type: Object as PropType<any>,
-      default: () => {
-        return {};
-      },
-    },
-  },
   setup() {
+    const store = useStore();
     const inputRef = ref<HTMLElement | null>(null);
     const state = reactive({
+      defaultAvatar: require("@/assets/images/user/user.png"),
       nicknameChanged: false,
-      nickname: "memoyu",
-      username: "memoyu",
+      username: "未登录",
+      nickname: "佚名",
     });
+
     onMounted(() => {
       console.log(inputRef.value);
+      init();
     });
+
+    const user = computed(() => {
+      return store.state.app.user;
+    });
+
+    const init = async (): Promise<void> => {
+      const user = store.state.app.user;
+      state.username = user ? user.username : "未登录";
+      state.nickname = user ? user.nickname : "佚名";
+    };
 
     const handlerChangeNickname = async (): Promise<void> => {
       state.nicknameChanged = true;
       console.log(inputRef.value);
       setTimeout(() => {
-       // inputRef.value?.focus();
+        // inputRef.value?.focus();
       }, 200);
     };
 
-    const handlerBlur = async () : Promise<void> =>{
+    const handlerBlur = async (): Promise<void> => {
       state.nicknameChanged = false;
     };
     return {
+      user,
       inputRef,
       ...toRefs(state),
       handlerChangeNickname,
