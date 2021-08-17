@@ -1,5 +1,6 @@
 export enum AppActionTypes {
     ACTION_SET_USER_AND_STATUS = 'ACTION_SET_USER_AND_STATUS',
+    ACTION_SET_SIGNOUT = 'ACTION_SET_SIGNOUT',
 }
 
 export enum AppMutationTypes {

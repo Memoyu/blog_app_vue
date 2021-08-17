@@ -4,6 +4,7 @@ import { AppActionTypes,  AppMutationTypes} from './types'
 import { Mutations } from './mutations'
 import { AppState } from './state'
 import { UserModel } from '@/models'
+import { removeToken } from "@/utils/token";
 
 type AugmentedActionContext = {
     commit<K extends keyof Mutations>(
@@ -15,6 +16,9 @@ type AugmentedActionContext = {
 export interface Actions {
     [AppActionTypes.ACTION_SET_USER_AND_STATUS](
         { commit }: AugmentedActionContext, user: UserModel
+    ): void,
+    [AppActionTypes.ACTION_SET_SIGNOUT](
+        { commit }: AugmentedActionContext
     ): void
 }
 
@@ -22,5 +26,10 @@ export const actions: ActionTree<AppState, RootState> & Actions = {
     [AppActionTypes.ACTION_SET_USER_AND_STATUS]({ commit }, user: UserModel) {
         commit(AppMutationTypes.SET_LOGIN_STATUS, true)
         commit(AppMutationTypes.SET_USER, user)
+    },
+    [AppActionTypes.ACTION_SET_SIGNOUT]({ commit }) {
+        removeToken();
+        commit(AppMutationTypes.SET_USER, {} as any)
+        commit(AppMutationTypes.SET_LOGIN_STATUS, false)
     }
 }

@@ -17,7 +17,7 @@ import { saveTokens } from "@/utils/token";
 import service from "@/api";
 import { account } from "@/api/urls";
 import { UserModel } from "@/models";
-import { AppActionTypes } from "@/store/modules/app/types";
+import { AppActionTypes, AppMutationTypes } from "@/store/modules/app/types";
 
 export default defineComponent({
   name: "LoginResult",
@@ -47,6 +47,7 @@ export default defineComponent({
     const handlerGetUserInfo = async (): Promise<void> => {
       try {
         const data: UserModel = await service.get(account.detail, {});
+         store.commit(AppMutationTypes.CONTROL_LOGIN, false);
         store.dispatch(AppActionTypes.ACTION_SET_USER_AND_STATUS, data);
       } catch (e) {
         console.log(e);

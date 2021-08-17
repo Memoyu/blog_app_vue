@@ -4,9 +4,9 @@
     <div class="send-message-card-content">
       <div class="side">
         <div class="imgbox x-c">
-          <img src="https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png" />
+          <img :src="user.avatarUrl || defaultAvatar" />
         </div>
-        <div class="name fs16">蜻蜓点水3333333333333333333</div>
+        <div class="name fs16">{{ user.username || "未登录" }}</div>
       </div>
       <div class="input">
         <a-textarea placeholder="知行合一" :rows="4" />
@@ -19,9 +19,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed, reactive, toRefs } from "vue";
+import { useStore } from "@/store";
+
 export default defineComponent({
   props: {},
+  setup() {
+    const store = useStore();
+
+    const state = reactive({
+      defaultAvatar: require("@/assets/images/user/user.png"),
+    });
+    const user = computed(() => {
+      return store.state.app.user;
+    });
+
+    return {
+      user,
+      ...toRefs(state)
+    };
+  },
 });
 </script>
 

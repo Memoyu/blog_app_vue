@@ -1,8 +1,8 @@
 <template>
   <div class="main-container">
     <div class="content">
-      <send-message class="message-card"></send-message>
-      <message-list></message-list>
+      <send-message class="message-card"/>
+      <message-list/>
     </div>
   </div>
 </template>

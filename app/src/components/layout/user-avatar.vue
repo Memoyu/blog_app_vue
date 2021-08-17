@@ -7,7 +7,7 @@
         </div>
       </span>
       <template #overlay>
-        <a-menu class="user-box">
+        <a-menu class="user-box" @click="handlerMenuItemClick">
           <div class="user-info">
             <div class="avatar">
               <img :src="user.avatarUrl || defaultAvatar" alt="头像" />
@@ -34,10 +34,18 @@
               <div class="username">{{ username }}</div>
             </div>
           </div>
-          <a-menu-item> <icon icon="UserOutlined" />我的主页</a-menu-item>
-          <a-menu-item> <icon icon="EditOutlined" />创作者中心</a-menu-item>
-          <a-menu-item> <icon icon="SettingOutlined" />设置</a-menu-item>
-          <a-menu-item> <icon icon="LogoutOutlined" />退出账户</a-menu-item>
+          <a-menu-item key="home">
+            <icon icon="UserOutlined" />我的主页</a-menu-item
+          >
+          <a-menu-item key="admin">
+            <icon icon="EditOutlined" />博客管理</a-menu-item
+          >
+          <a-menu-item key="setting">
+            <icon icon="SettingOutlined" />设置</a-menu-item
+          >
+          <a-menu-item key="signOut">
+            <icon icon="LogoutOutlined" />退出账户</a-menu-item
+          >
         </a-menu>
       </template>
     </a-dropdown>
@@ -51,10 +59,16 @@ import {
   onMounted,
   reactive,
   computed,
-  toRefs
+  toRefs,
 } from "vue";
 import { Icon } from "@/icon";
 import { useStore } from "@/store";
+import { AppActionTypes } from "@/store/modules/app/types";
+interface MenuInfo {
+  key: string;
+  keyPath: string[];
+  domEvent: MouseEvent;
+}
 
 export default defineComponent({
   components: { Icon },
@@ -94,12 +108,26 @@ export default defineComponent({
     const handlerBlur = async (): Promise<void> => {
       state.nicknameChanged = false;
     };
+
+    const handlerMenuItemClick = async ({ key }: MenuInfo): Promise<void> => {
+       switch (key) {
+        case 'signOut':
+          signOut();
+          break;
+      }
+    };
+
+     const signOut = async (): Promise<void> => {
+       store.dispatch(AppActionTypes.ACTION_SET_SIGNOUT, {} as any)
+     }
+
     return {
       user,
       inputRef,
       ...toRefs(state),
       handlerChangeNickname,
       handlerBlur,
+      handlerMenuItemClick,
     };
   },
 });
