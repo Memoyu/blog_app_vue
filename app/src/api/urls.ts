@@ -13,6 +13,10 @@ export const article: any = {
     detail: "article/"
 }
 
+export const comment: any = {
+    page: "comment/article/page"
+}
+
 export const category: any = {
     all: "category/all"
 }

@@ -5,6 +5,11 @@ export interface ArticlePageModel {
     items: Array<ArticleItemModel>;
 }
 
+export interface CommentPageModel {
+    total: number;
+    items: Array<CommentModel>;
+}
+
 export interface ArticleItemModel {
     id: number,
     title: string,
@@ -112,3 +117,20 @@ export interface FriendLinkModel {
       type: number,
       createTime: string
 }
+
+
+export interface CommentModel {
+    id: number,
+    respId: number,
+    rootCommentId: number,
+    respUserId: number,
+    text: string,
+    likesQuantity: number,
+    articleId: number,
+    userInfo: UserModel,
+    respUserInfo: UserModel,
+    childs: Array<CommentModel>,
+    replyVisible: boolean
+    createTime: string
+}
+

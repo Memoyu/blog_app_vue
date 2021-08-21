@@ -1,6 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { message } from 'ant-design-vue'
 import { getToken } from "@/utils/token";
+import { useStore } from "@/store";
+import { AppActionTypes } from "@/store/modules/app/types";
 
 export interface ResponseData {
   code: number;
@@ -36,10 +38,13 @@ service.interceptors.request.use(
 // respone 拦截器 axios 的一些配置
 service.interceptors.response.use(
   (res: AxiosResponse) => {
-    // Some example codes here:
-    // code == 0: success
+    const store = useStore();
     if (res.status === 200) {
       const data: ResponseData = res.data
+      if (data.code === 10000 || data.code === 10100 || data.code === 10040 || data.code === 10050) {
+        store.dispatch(AppActionTypes.ACTION_SET_SIGNOUT, {} as any)
+      }
+
       if (data.success) {
         return data.result;
       } else {

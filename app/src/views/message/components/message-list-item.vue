@@ -1,42 +1,86 @@
 <template>
-  <div class="message-item card-border-radius">
-    <div class="message-content-left">
-      <div class="imgbox x-c">
-        <img src="https://raw.githubusercontent.com/Memoyu/CoreMe/master/doc/images/memoyu.png" />
-      </div>
+ <div class="comments-item">
+    <div class="pull-left">
+      <img
+        class="avatar-32"
+        :src="author.avatar||defaultAvatar"
+        alt="default"
+        @click="handleClickAvatar"
+      />
     </div>
-
-    <div class="message-content-right">
-      <div class="message">
-        <div class="message-sponsor">
-          <span class="message-user">留言人</span>
-          <span class="message-date">评论于 2021-05-09 23:30:22</span>
-          <span class="message-floor pull-right">1楼</span>
+    <div class="comments-box">
+      <div class="comments-trigger">
+        <div class="pull-right comments-option">
+          <a
+            href="javascript:void(0)"
+            class="ml10"
+            data-placement="top"
+            :title="item.title"
+            v-for="item in tools"
+            :key="item.name"
+            v-show="item.is_audit"
+            @click="handleClickTool($event, item)"
+          >
+            <i :class="item.icon" v-if="item.icon"></i>
+            <span v-if="item.text">{{item.text}}</span>
+          </a>
         </div>
-        <div class="message-detail">这是回复！！！！！！！！！</div>
-        <div class="message-footer y-end">
-          <a-button  type="primary" shape="round">回复</a-button>
-        </div>
+        <strong>
+          <router-link
+            v-if="author.id!=0"
+            :to="{path:`/user/${author.id}/article`}"
+            target="_blank"
+            @click="handleClickAuthor"
+          >{{author.nickname}}</router-link>
+          <a v-if="author.id==0" @click="handleClickAuthor">{{author.nickname}}</a>
+        </strong>
+        <!-- <span class="comments-date">· {{time | filterTimeYmdHms}}</span> -->
       </div>
-      <div class="reply" v-if="false">
-        <div class="reply-input">
-          <a-textarea placeholder="回复 XXXXXX:" :rows="4" />
-          <div class="reply-footer pull-right">
-            <a-space>
-              <a-button type="primary" shape="round">取消回复</a-button>
-              <a-button type="primary" shape="round">回复留言</a-button>
-            </a-space>
-          </div>
-        </div>
+      <div class="comments-content">
+        <p v-html="commentContent"></p>
+      </div>
+      <p class="comments-ops">
+        <span class="comments-reply-btn ml15" @click="handleAddReply" v-show="isAudit">
+          <i class="iconfont icon-comment coments-ops-icon"></i>
+          {{replyText}}
+        </span>
+        <a-popconfirm
+          :title="hasReply?'删除评论后，评论下的所有回复都会被删除!':'确认删除此评论'"
+          @onConfirm="handleDeleteReply"
+          v-show="user!=null&&author.id==user.id"
+        >
+          <span class="comments-reply-btn ml15" >
+            <i class="iconfont icon-delete coments-ops-icon"></i>
+            删除
+          </span>
+        </a-popconfirm>
+      </p>
+      <div class="comment-input" v-show="replyVisible">
+        <slot name="comment-input"></slot>
+      </div>
+      <div class="reply-list" v-show="hasReply">
+        <slot name="reply-list"></slot>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, toRefs, reactive } from "vue";
 export default defineComponent({
   props: {},
+  setup () {
+    const state = reactive({
+      defaultAvatar: require("@/assets/images/user/user.png"),
+      nicknameChanged: false,
+      username: "未登录",
+      nickname: "佚名",
+    });
+
+    return {
+      ...toRefs(state)
+    }
+  }
 });
 </script>
 

@@ -50,6 +50,14 @@
               @click="HandlePreview($event)"
             ></div>
           </a-card>
+          <div id="comment-list" class="margin-bottom-xs">
+            <comment-list
+              :articleId="id"
+              :respUserId="articleDetail.user.id"
+              :authorId="articleDetail.user.id"
+              v-on:success="getCommentSuccess"
+            ></comment-list>
+          </div>
         </a-col>
         <a-col :xl="6" :lg="6" :md="24" :sm="24" :xs="24" class="sidebar-user">
           <a-card
@@ -84,11 +92,15 @@ import Vditor from "vditor";
 import service from "@/api";
 import { ArticleDetailModel } from "@/models";
 import { article } from "@/api/urls";
+import CommentList from "@/views/article/components/comment-list.vue";
 declare let document: Document | any;
 
 export default defineComponent({
   name: "ArticleDetail",
-  components: { Icon },
+  components: {
+    Icon,
+    CommentList,
+  },
   setup() {
     const route = useRoute();
     const state = reactive({
@@ -265,9 +277,14 @@ export default defineComponent({
       }
     };
 
+   const getCommentSuccess = (total: number) => {
+      console.log(total + " 这是总数")
+    };
+
     return {
       ...toRefs(state),
       HandlePreview,
+      getCommentSuccess
     };
   },
 });

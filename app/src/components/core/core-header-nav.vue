@@ -61,7 +61,7 @@ export default defineComponent({
       // { name: "分类", url: "/category", icon: "logo-octocat" },
       // { name: "标签", url: "/tag", icon: "logo-octocat" },
       { name: "友链", url: "/friend", icon: "logo-octocat" },
-      { name: "留言", url: "/message", icon: "md-chatboxes" },
+      // { name: "留言", url: "/message", icon: "md-chatboxes" },
     ];
 
     const isLogin = computed(() => {
