@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card class="margin-top-xs" v-if="commentable == false">
+    <a-card class="margin-top-xs" v-if="commentable == false">
       <section>
         <el-row type="flex" align="center">
           <el-col :span="12" justify="left">
@@ -17,9 +17,9 @@
           </el-col>
         </el-row>
       </section>
-    </el-card>
+    </a-card>
     <div v-else>
-      <el-card
+      <a-card
         shadow="never"
         :body-style="{ 'padding-bottom': '0px' }"
         style="margin-bottom: 20px; margin-top: 20px"
@@ -33,31 +33,10 @@
             respUserId: respUserId,
           }"
         ></comment-input>
-      </el-card>
-      <el-card shadow="never">
-        <!-- :ops="[
-                {
-                  count:comment.likes_quantity,
-                  name:'点赞',
-                  icon:'iconfont icon-'+(comment.is_liked?'like-fill':'like'),
-                  click:()=>handleLike(comment,index)
-           
-                }
-        ]"-->
+      </a-card>
+      <a-card shadow="never">
         <div class="clearfix">
           <span>全部评论</span>
-          <a-popconfirm
-            confirmButtonText="确认"
-            cancelButtonText="取消"
-            icon="el-icon-info"
-            iconColor="red"
-            title="你确认要关闭评论"
-            @onConfirm="() => updateCommentable(false)"
-          >
-            <a-button style="float: right; padding: 3px 0" type="text"
-              >关闭评论</a-button
-            >
-          </a-popconfirm>
         </div>
         <comment-list-item
           v-for="(comment, index) in comments"
@@ -79,48 +58,52 @@
             },
           ]"
         >
-          <comment-input
-            @success="() => getTopComments(comment.id, index)"
-            :form="{
-              articleId: articleId,
-              respId: comment.id,
-              rootCommentId: comment.id,
-              respUserId: comment.userInfo.id,
-            }"
-          ></comment-input>
-          <reply-item
-            v-for="(reply, i) in comment.top_comment"
-            :key="reply.id"
-            :author="reply.user_info"
-            :resp_user_info="reply.resp_user_info"
-            :content="reply.text"
-            :time="reply.create_time"
-            @clickTool="
-              ($event, item) => handleClickReplyTool(item, reply, index, i)
-            "
-            @addReply="handleAddCommentReply(reply, index, i)"
-            @deleteReply="handleDeleteCommentReply(reply, index, i)"
-            :replyVisible="reply.replyVisible"
-            :tools="[
-              {
-                text: reply.likes_quantity,
-                title: '点赞',
-                name: 'like',
-                icon:
-                  'iconfont icon-' + (reply.is_liked ? 'like-fill' : 'like'),
-              },
-            ]"
-          >
+          <template v-slot:comment-input>
             <comment-input
-              @success="() => getTopComments(reply.root_comment_id, index)"
+              @success="() => getTopComments(comment.id, index)"
               :form="{
                 articleId: articleId,
-                respId: reply.id,
-                rootComment_id: reply.rootCommentId,
-                respUserId: reply.userInfo.id,
+                respId: comment.id,
+                rootCommentId: comment.id,
+                respUserId: comment.userInfo.id,
               }"
-            ></comment-input>
-          </reply-item>
+            >
+            </comment-input>
+          </template>
+          <template v-slot:reply-list>
+            <reply-item
+              v-for="(reply, i) in comment.childs"
+              :key="reply.id"
+              :comment="reply"
+              @clickTool="
+                ($event, item) => handleClickReplyTool(item, reply, index, i)
+              "
+              @addReply="handleAddCommentReply(reply, index, i)"
+              @deleteReply="handleDeleteCommentReply(reply, index, i)"
+              :replyVisible="reply.replyVisible"
+              :tools="[
+                {
+                  text: reply.likes_quantity,
+                  title: '点赞',
+                  name: 'like',
+                  icon:
+                    'iconfont icon-' + (reply.is_liked ? 'like-fill' : 'like'),
+                },
+              ]"
+            >
+              <template v-slot:reply-item-input>
+                <comment-input
+                  @success="() => getTopComments(reply.root_comment_id, index)"
+                  :form="{
+                    articleId: articleId,
+                    respId: reply.id,
+                    rootComment_id: reply.rootCommentId,
+                    respUserId: reply.userInfo.id,
+                  }"
+                ></comment-input>
+              </template>
+            </reply-item>
+          </template>
         </comment-list-item>
 
         <infinite-loading
@@ -135,7 +118,7 @@
             <el-divider>没有更多评论了...</el-divider>
           </template>
         </infinite-loading>
-      </el-card>
+      </a-card>
     </div>
   </div>
 </template>
@@ -209,7 +192,6 @@ export default defineComponent({
 
         $state && $state.loaded();
       }
-      debugger
       emit("success", res.total);
     };
 

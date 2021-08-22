@@ -37,19 +37,14 @@
             comment.userInfo.nickname
           }}</a>
         </strong>
-        <span class="comments-date">· {{ time }}</span>
+        <span class="comments-date"> · {{ comment.createTime }}</span>
       </div>
       <div class="comments-content">
         <p v-html="commentText"></p>
       </div>
       <p class="comments-ops">
-        <span
-          class="comments-reply-btn ml15"
-          @click="handleAddReply"
-          v-show="isAudit"
-        >
-          <i class="iconfont icon-comment coments-ops-icon"></i>
-          {{ replyText }}
+        <span class="comments-reply-btn ml15" @click="handleAddReply">
+          <icon icon="MessageOutlined" /> {{ replyText }}
         </span>
         <a-popconfirm
           :title="
@@ -58,11 +53,12 @@
               : '确认删除此评论'
           "
           @onConfirm="handleDeleteReply"
-          v-show="user != null && comment.id == user.id"
         >
-          <span class="comments-reply-btn ml15">
-            <i class="iconfont icon-delete coments-ops-icon"></i>
-            删除
+          <span
+            class="comments-reply-btn ml15"
+            v-show="user != null && comment.userInfo.id == user.id"
+          >
+            <icon icon="DeleteOutlined" /> 删除
           </span>
         </a-popconfirm>
       </p>
@@ -78,33 +74,56 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, PropType, computed } from "vue";
-import Formats from '@/utils/format-util';
+import Formats from "@/utils/format-util";
 import { CommentModel } from "@/models";
+import { Icon } from "@/icon";
+import { useStore } from "@/store";
 
 export default defineComponent({
   name: "CommentListItem",
-  components: {},
+  components: { Icon },
   props: {
     comment: {
       type: Object as PropType<CommentModel>,
       default: () => {
         return {};
       },
-      time: [String, Number],
     },
   },
   setup(props) {
+    const store = useStore();
     const state = reactive({
+      replyVisible: false,
       defaultAvatar: require("@/assets/images/user/user.png"),
     });
 
- const commentText = computed(() => {
-     return Formats.formatHtml(Formats.formatHyperLink(props.comment.text));
+    const user = computed(() => {
+      return store.state.app.user;
     });
 
+    const hasReply = computed(() => {
+      return props.comment.childs && props.comment.childs.length > 0;
+    });
+
+    const replyText = computed(() => {
+      return state.replyVisible == true ? "取消回复" : "回复";
+    });
+
+    const commentText = computed(() => {
+      return Formats.formatHtml(Formats.formatHyperLink(props.comment.text));
+    });
+
+    const handleAddReply = async (): Promise<void> => {
+      state.replyVisible = !state.replyVisible;
+    };
+
     return {
-        commentText,
+      user,
+      hasReply,
+      replyText,
+      commentText,
       ...toRefs(state),
+      handleAddReply,
     };
   },
 });
@@ -182,7 +201,7 @@ img {
   display: table;
 }
 .comments-content::after {
-  content: '';
+  content: "";
   clear: both;
 }
 .comments-ops {

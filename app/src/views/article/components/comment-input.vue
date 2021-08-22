@@ -1,16 +1,14 @@
 <template>
   <div>
-    <a-form ref="form" :rules="rules" :model="model">
+    <a-form ref="form" :rules="rules" :model="model" layout="vertical">
       <a-form-item prop="text">
-        <a-input
-          type="textarea"
-          :autosize="{ minRows: 2, maxRows: 4 }"
+        <a-textarea 
           placeholder="请输入评论内容"
-          v-model="model.text"
+          v-model:value="model.text"
           minlength="1"
-          :maxlength="surplus"
-          show-word-limit
-        ></a-input>
+          showCount
+          :maxlength="300"
+        ></a-textarea>
       </a-form-item>
       <a-form-item style="text-align: right">
         <a-button
@@ -45,9 +43,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.a-form-item {
+.ant-form-item {
   margin-bottom: 1px !important;
-  /deep/ .el-form-item__content {
+  /deep/ .ant-form-item__content {
     line-height: 20px;
     margin-bottom: 10px;
   }

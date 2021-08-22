@@ -1,25 +1,32 @@
 <template>
-<div>
+  <div>
     <div class="reply-item">
       <div class="pull-left">
-        <img class="avatar-32" :src="author.avatar||defaultAvatar" alt @click="handleClickAvatar" />
+        <img
+          class="avatar-32"
+          :src="comment.userInfo.avatarUrl || defaultAvatar"
+          alt
+          @click="handleClickAvatar"
+        />
       </div>
       <div class="reply-content-block">
         <div class="comment-func">
           <span class="comment-meta inline-block">
             <a
               target="_blank"
-              :href="`/user/${author.id}/article`"
+              :href="`/user/${comment.userInfo.id}/article`"
               @click="handleClickAuthor($event)"
-            >{{author.nickname}}</a>
-            <template v-if="resp_user_info!=null">
-              <span style="margin:0px 5px;">回复</span>
+              >{{ comment.userInfo.nickname }}</a
+            >
+            <template v-if="comment.respUserInfo != null">
+              <span style="margin: 0px 5px">回复</span>
               <a
                 target="_blank"
-                :href="`/user/${resp_user_info.id}/article`"
-              >{{resp_user_info.nickname}}</a>
+                :href="`/user/${comment.respUserInfo.id}/article`"
+                >{{ comment.respUserInfo.nickname }}</a
+              >
             </template>
-            <span class="comments-date">· {{time}}</span>
+            <span class="comments-date"> · {{ comment.createTime }}</span>
           </span>
           <span class="pull-right comment-tools ml15">
             <a
@@ -32,28 +39,27 @@
               @click="handleClickTool($event, item)"
             >
               <i :class="item.icon" v-if="item.icon"></i>
-              <span v-if="item.text">{{item.text}}</span>
+              <span v-if="item.text">{{ item.text }}</span>
             </a>
           </span>
         </div>
         <div class="reply-content">
-          <p v-html="commentContent"></p>
+          <p v-html="commentText"></p>
         </div>
       </div>
       <div class="comments-ops">
         <div class="coments-ops-item">
           <span class="comments-reply-btn ml15" @click="handleAddReply">
-            <i class="iconfont icon-comment coments-ops-icon"></i>
-            {{replyText}}
+             <icon icon="MessageOutlined" />
+            {{ replyText }}
           </span>
           <a-popconfirm
             class="comments-reply-btn"
             title="确认删除此评论"
             @onConfirm="handleDeleteReply"
-            v-show="user!=null&&author.id==user.id"
           >
-            <span class="ml15">
-              <i class="iconfont icon-delete coments-ops-icon"></i>
+            <span class="ml15" v-show="user != null && comment.userInfo.id == user.id">
+              <icon icon="DeleteOutlined" />
               删除
             </span>
           </a-popconfirm>
@@ -67,11 +73,54 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, toRefs, computed, PropType } from "vue";
+import { useStore } from "@/store";
+import { CommentModel } from "@/models";
+import Formats from "@/utils/format-util";
+import { Icon } from "@/icon";
 
 export default defineComponent({
   name: "ReplyItem",
-  components: {},
+  components: { Icon },
+  props: {
+    comment: {
+      type: Object as PropType<CommentModel>,
+      default: () => {
+        return {};
+      },
+    },
+  },
+  setup(props) {
+    const store = useStore();
+    const state = reactive({
+      replyVisible: false,
+      defaultAvatar: require("@/assets/images/user/user.png"),
+    });
+
+    const user = computed(() => {
+      return store.state.app.user;
+    });
+    
+    const replyText = computed(() => {
+      return state.replyVisible == true ? "取消回复" : "回复";
+    });
+
+  const commentText = computed(() => {
+      return Formats.formatHtml(Formats.formatHyperLink(props.comment.text));
+    });
+
+    const handleAddReply = async (): Promise<void> => {
+      state.replyVisible = !state.replyVisible;
+    };
+
+    return {
+      user,
+      replyText,
+      commentText,
+      ...toRefs(state),
+      handleAddReply,
+    };
+  },
 });
 </script>
 
