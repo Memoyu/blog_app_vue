@@ -61,7 +61,7 @@
         </a-col>
         <a-col :xl="6" :lg="6" :md="24" :sm="24" :xs="24" class="sidebar-user">
           <a-card
-            class="aside-list"
+            class="aside-list card-border-radius"
             shadow="never"
             :body-style="{ padding: '12px' }"
             :style="aside > 300 ? 'position: fixed;top:30px;width:260px;' : ''"

@@ -111,10 +111,10 @@
           spinner="bubbles"
           :identifier="any"
         >
-          <template #no-more>
+          <template v-slot:no-more>
             <el-divider>我也是有底线的...</el-divider>
           </template>
-          <template #no-results>
+          <template v-slot:no-results>
             <el-divider>没有更多评论了...</el-divider>
           </template>
         </infinite-loading>
@@ -186,7 +186,6 @@ export default defineComponent({
         } else {
           state.comments = state.comments.concat(res.items);
         }
-
         state.params.page += 1;
         state.total = res.total;
 

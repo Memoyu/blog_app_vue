@@ -19,7 +19,7 @@
         <a href="https://github.com/Memoyu" target="_blank" class="link">
           <icon class="icon" icon="GithubOutlined" />
         </a>
-        <a target="_blank" style="color: black">桂ICP备20005450号-1</a>
+        <a target="_blank" href="https://beian.miit.gov.cn/" style="color: black">桂ICP备20005450号-1</a>
       </span>
     </div>
   </footer>

@@ -22,9 +22,13 @@
             spinner="bubbles"
             :identifier="any"
           >
-            <template #no-more>
+            <template v-slot:no-more>
               <a-divider>我也是有底线的...</a-divider>
             </template>
+
+            <!-- <template v-slot:no-results>
+              <a-divider>没有更多评论了...</a-divider>
+            </template> -->
           </infinite-loading>
         </a-col>
 
