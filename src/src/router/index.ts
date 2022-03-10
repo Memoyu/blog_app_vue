@@ -1,12 +1,20 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import Layout from '@/layout/Index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/home",
+    path: "/",
+    component: Layout,
     name: "Home",
-    component: () => import("@/views/home.vue")
-  },
-  { path: "/", redirect: { name: "Home" } }
+    redirect: "/home",
+    children: [
+      {
+        path: 'home',
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/home.vue'),
+        name: 'Home'
+      }
+    ]
+  }
 ]
 
 const router = createRouter({
