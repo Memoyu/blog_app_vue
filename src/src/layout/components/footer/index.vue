@@ -1,5 +1,5 @@
 <template>
-    <footer>
+    <el-footer>
         <div class="foot-text">
             <span class="base">
                 Prower By
@@ -31,14 +31,18 @@
                 >桂ICP备20005450号</a>
             </span>
         </div>
-    </footer>
+    </el-footer>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { ElFooter } from "element-plus";
 
 export default defineComponent({
     name: "Footer",
+    components: {
+        ElFooter,
+    },
     setup() {
         return {
             year: new Date().getFullYear()
@@ -49,9 +53,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 footer {
-    position: relative;
-    display: flex;
-    flex: 0 1 auto;
     .link {
         margin: 0 10px;
         color: black;
@@ -70,7 +71,6 @@ footer {
         text-align: center;
         // background: #93a6ab;
         width: 100%;
-        padding: 10px 0 15px;
         color: black;
         .base {
             span,

@@ -1,24 +1,48 @@
 <template>
-  <el-config-provider :zIndex="zIndex">
-    <router-view />
+  <el-config-provider>
+    <el-container direction="vertical">
+      <Navbar />
+      <el-main>
+        <keep-alive>
+          <router-view />
+        </keep-alive>
+      </el-main>
+      <Footer />
+    </el-container>
   </el-config-provider>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ElConfigProvider } from 'element-plus'
+import { ElConfigProvider, ElContainer, ElMain } from 'element-plus'
+import Footer from '@/layout/components/footer/index.vue'
+import Navbar from '@/layout/components/navigation_bar/index.vue'
 
 export default defineComponent({
   components: {
     ElConfigProvider,
+    ElContainer,
+    ElMain,
+    Footer,
+    Navbar
   },
   setup() {
     return {
-      zIndex: 3000
     }
   },
 })
 </script>
 
 <style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+  color: #2c3e50;
+}
+
+.el-container {
+  min-height: 100vh;
+}
 </style>
