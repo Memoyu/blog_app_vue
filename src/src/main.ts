@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import 'element-plus/dist/index.css'
+import '@/styles/index.scss'
+import '@/assets/iconfont/iconfont.css'
 import App from '@/App.vue'
 import router from '@/router/index'
 import store from '@/store/index'
