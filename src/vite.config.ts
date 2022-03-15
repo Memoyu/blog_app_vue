@@ -19,17 +19,21 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         // 引入 var.scss 这样就可以在全局中使用 var.scss中预定义的变量了
-        additionalData: '@import "./src/styles/_variables.scss";',
+        additionalData: '@use "@/styles/_variables.scss" as *;',
       },
     },
   },
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver({
+        importStyle: "sass",
+      })],
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver({
+        importStyle: "sass"
+      })],
     }),
     visualizer({
       open: true,

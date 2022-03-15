@@ -21,12 +21,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import logo from '@/assets/images/logo.png'
-import { ElButton } from "element-plus";
 
 export default defineComponent({
     name: "About",
     components: {
-        ElButton
     },
     setup() {
         return {

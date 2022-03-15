@@ -5,7 +5,7 @@
                 <div class="content-center">
                     <div class="title-container content-center">
                         <div class="title">
-                            <span>Memoyu</span>
+                            <a class="title-content" @click="navTo('/')">Memoyu</a>
                             <span class="subtitle">知行合一</span>
                         </div>
                     </div>
@@ -13,13 +13,21 @@
                     <li
                         v-for="(item, index) in nav"
                         :key="index"
-                        :class="{ active: $route.path == item.url }"
+                        :class="{ active: $route.path == item.path }"
                     >
-                        <el-button type="text">{{ item.name }}</el-button>
+                        <el-button
+                            type="text"
+                            size="large"
+                            @click="navTo(item.path)"
+                        >{{ item.name }}</el-button>
                     </li>
                     <el-row>
-                        <el-button type="text" :icon="Search" circle></el-button>
-                        <el-button type="text" :icon="Search" circle></el-button>
+                        <el-button type="text" size="large" circle>
+                            <i class="iconfont iconwechat" />
+                        </el-button>
+                        <el-button type="text" size="large" circle>
+                            <i class="iconfont icongithub" />
+                        </el-button>
                     </el-row>
                 </div>
                 <!-- <div class="x-c">
@@ -36,29 +44,27 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { ElHeader } from "element-plus";
-import {
-    Search
-} from '@element-plus/icons-vue'
-import { useRouter } from "vue-router";
+import { RouteLocationRaw, useRouter } from "vue-router";
 export default defineComponent({
     name: "Footer",
     components: {
-        ElHeader,
-        Search
+        ElHeader
     },
     setup() {
         const router = useRouter();
         const nav = [
-            { name: "文章", url: "/article", icon: "ios-book" },
-            // { name: "分类", url: "/category", icon: "logo-octocat" },
-            // { name: "标签", url: "/tag", icon: "logo-octocat" },
-            { name: "友链", url: "/friend", icon: "logo-octocat" },
-            // { name: "留言", url: "/message", icon: "md-chatboxes" },
+            { name: "文章", path: "/article", icon: "ios-book" },
+            // { name: "分类", path: "/category", icon: "logo-octocat" },
+            // { name: "标签", path: "/tag", icon: "logo-octocat" },
+            { name: "友链", path: "/friend", icon: "logo-octocat" },
+            // { name: "留言", path: "/message", icon: "md-chatboxes" },
         ];
+
+        const navTo = (path: string) => router.push({ path: path })
 
         return {
             nav,
-            Search
+            navTo
         }
     }
 })
@@ -98,11 +104,26 @@ header {
                 align-items: center;
             }
             .title {
-                font-size: 22px;
                 display: flex;
                 flex-direction: column;
-                font-weight: bold;
                 text-align: end;
+                .title-content {
+                    display: inline-block;
+                    margin: 0;
+                    font-size: $h3-font-size;
+                    font-weight: 700;
+                    line-height: 1.2;
+                    text-decoration: none;
+
+                    &:visited {
+                        color: black;
+                    }
+                    &:hover,
+                    &:focus {
+                        color: $primary;
+                    }
+                }
+
                 .subtitle {
                     font-weight: normal;
                     font-size: 12px;
@@ -119,10 +140,6 @@ header {
                 &:hover {
                     background: rgba(0, 0, 0, 0.07);
                     border-radius: 3px;
-                }
-                a {
-                    font-size: 16px;
-                    color: #000;
                 }
             }
         }

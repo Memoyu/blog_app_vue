@@ -1,6 +1,24 @@
-.icon {
-    width: 1em; height: 1em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
- }
+@font-face {
+    font-family: "iconfont"; /* Project id 1938292 */
+    src: url('iconfont.woff2?t=1647324872811') format('woff2'),
+         url('iconfont.woff?t=1647324872811') format('woff'),
+         url('iconfont.ttf?t=1647324872811') format('truetype');
+  }
+  
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 19px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .iconwechat:before {
+    content: "\e658";
+  }
+  
+  .icongithub:before {
+    content: "\e64c";
+  }
+  
+  
