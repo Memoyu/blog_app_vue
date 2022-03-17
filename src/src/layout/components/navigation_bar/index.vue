@@ -114,6 +114,7 @@ header {
                     font-weight: 700;
                     line-height: 1.2;
                     text-decoration: none;
+                    cursor: pointer;
 
                     &:visited {
                         color: black;
