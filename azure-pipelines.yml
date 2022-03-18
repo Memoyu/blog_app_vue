@@ -26,26 +26,20 @@ steps:
   displayName: 'npm install and build'
   
 - task: CopyFiles@2
-  displayName: 'Copy dist and script to: $(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy scripts to dist'
   inputs:
     Contents: |
-      src/dist/**
       docker/Dockerfile
       conf/nginx.conf
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    TargetFolder: 'src/dist'
     flattenFolders: true
 
-- script:  |
-        echo ==================ls==================
-        echo $(Build.ArtifactStagingDirectory)
-        cd $(Build.ArtifactStagingDirectory)
-        ls
 - task: Docker@2
   inputs:
     containerRegistry: 'memoyu-docker'
     repository: 'memoyu/blogapp'
     command: 'buildAndPush'
-    Dockerfile: '$(Build.ArtifactStagingDirectory)/Dockerfile'
+    Dockerfile: 'src/dist/Dockerfile'
     tags: 'latest'
 
 #- task: SSH@0
