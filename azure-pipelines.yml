@@ -35,6 +35,7 @@ steps:
     flattenFolders: true
 
 - task: Docker@2
+  displayName: 'build docker image and push'
   inputs:
     containerRegistry: 'memoyu-docker'
     repository: 'memoyu/blogapp'
@@ -42,19 +43,20 @@ steps:
     Dockerfile: 'src/dist/Dockerfile'
     tags: 'latest'
 
-#- task: SSH@0
-#  inputs:
-#    sshEndpoint: 'HuaweiCloud'
-#    runOptions: 'inline'
-#    inline: |
-#      echo "================= to del container ===================="
-#      docker kill blogapp
-#      docker rm blogapp
-#      echo "================= to rm image ===================="
-#      docker rmi memoyu/blogapp
-#      echo "================= to pull image ===================="
-#      docker pull memoyu/blogapp
-#      echo "================= to run container ===================="
-#      docker run --name blogapp -d -p 9002:80 memoyu/blogapp
-#      echo "================= publish success ===================="
-#    readyTimeout: '20000'
+- task: SSH@0
+  displayName: 'run blog api container'
+  inputs:
+    sshEndpoint: 'HuaweiCloud'
+    runOptions: 'inline'
+    inline: |
+      echo "================= to del container ===================="
+      docker kill blogapp
+      docker rm blogapp
+      echo "================= to rm image ===================="
+      docker rmi memoyu/blogapp
+      echo "================= to pull image ===================="
+      docker pull memoyu/blogapp
+      echo "================= to run container ===================="
+      docker run --name blogapp -d -p 9002:80 memoyu/blogapp
+      echo "================= publish success ===================="
+    readyTimeout: '20000'
