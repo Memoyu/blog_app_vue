@@ -1,0 +1,57 @@
+# Node.js with Vue
+# Build a Node.js project that uses Vue.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+  
+- task: CopyFiles@2
+  inputs:
+    Contents: |
+      dist\**
+      docker\Dockerfile
+      conf\nginx.conf
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- script:  |
+        echo ==================ls==================
+        ls
+- task: Docker@2
+  inputs:
+    containerRegistry: 'memoyu-docker'
+    repository: 'memoyu/blogapp'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: 'latest'
+
+#- task: SSH@0
+#  inputs:
+#    sshEndpoint: 'HuaweiCloud'
+#    runOptions: 'inline'
+#    inline: |
+#      echo "================= to del container ===================="
+#      docker kill blogapp
+#      docker rm blogapp
+#      echo "================= to rm image ===================="
+#      docker rmi memoyu/blogapp
+#      echo "================= to pull image ===================="
+#      docker pull memoyu/blogapp
+#      echo "================= to run container ===================="
+#      docker run --name blogapp -d -p 9002:80 memoyu/blogapp
+#      echo "================= publish success ===================="
+#    readyTimeout: '20000'
