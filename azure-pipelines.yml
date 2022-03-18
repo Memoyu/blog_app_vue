@@ -43,8 +43,7 @@ steps:
     containerRegistry: 'memoyu-docker'
     repository: 'memoyu/blogapp'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
-    buildContext: $(Build.ArtifactStagingDirectory)
+    Dockerfile: '$(Build.ArtifactStagingDirectory)/Dockerfile'
     tags: 'latest'
 
 #- task: SSH@0
