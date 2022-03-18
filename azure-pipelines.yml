@@ -28,9 +28,9 @@ steps:
 - task: CopyFiles@2
   inputs:
     Contents: |
-      src\dist\**
-      docker\Dockerfile
-      conf\nginx.conf
+      src/dist/**
+      docker/Dockerfile
+      conf/nginx.conf
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - script:  |
