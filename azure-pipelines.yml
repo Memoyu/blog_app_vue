@@ -19,7 +19,7 @@ steps:
     cd src
     echo ==================src==================
     ls
-    yarn install
+    yarn
     yarn run build
     echo ==================base==================
     ls
