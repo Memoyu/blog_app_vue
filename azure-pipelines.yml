@@ -26,7 +26,9 @@ steps:
   displayName: 'npm install and build'
   
 - task: CopyFiles@2
+  displayName: 'Copy dist and script to: $(Build.ArtifactStagingDirectory)'
   inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
     Contents: |
       src/dist/**
       docker/Dockerfile
