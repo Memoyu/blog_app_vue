@@ -16,10 +16,14 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    echo ==================ls==================
+    cd /src
+    echo ==================src==================
     ls
     npm install
     npm run build
+    echo ==================base==================
+    ls
+    cd .. 
   displayName: 'npm install and build'
   
 - task: CopyFiles@2
