@@ -36,7 +36,8 @@ steps:
 - script:  |
         echo ==================ls==================
         echo $(Build.ArtifactStagingDirectory)
-        ls $(Build.ArtifactStagingDirectory)
+        cd $(Build.ArtifactStagingDirectory)
+        ls
 - task: Docker@2
   inputs:
     containerRegistry: 'memoyu-docker'
