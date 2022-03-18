@@ -28,12 +28,12 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy dist and script to: $(Build.ArtifactStagingDirectory)'
   inputs:
-    SourceFolder: '$(Agent.BuildDirectory)'
     Contents: |
       src/dist/**
       docker/Dockerfile
       conf/nginx.conf
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    flattenFolders: true
 
 - script:  |
         echo ==================ls==================
