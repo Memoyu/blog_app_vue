@@ -35,6 +35,7 @@ steps:
 
 - script:  |
         echo ==================ls==================
+        echo $(Build.ArtifactStagingDirectory)
         ls
 - task: Docker@2
   inputs:
