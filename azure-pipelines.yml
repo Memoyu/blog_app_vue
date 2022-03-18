@@ -43,6 +43,7 @@ steps:
     repository: 'memoyu/blogapp'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+    buildContext: $(Build.ArtifactStagingDirectory)
     tags: 'latest'
 
 #- task: SSH@0
