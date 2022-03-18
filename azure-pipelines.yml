@@ -19,8 +19,8 @@ steps:
     cd src
     echo ==================src==================
     ls
-    npm install
-    npm run build
+    yarn install
+    yarn run build
     echo ==================base==================
     ls
     cd .. 
