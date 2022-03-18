@@ -16,7 +16,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    cd /src
+    cd src
     echo ==================src==================
     ls
     npm install
