@@ -527,6 +527,11 @@ entities@^3.0.1:
   resolved "https://registry.npmjs.org/entities/-/entities-3.0.1.tgz"
   integrity sha512-WiyBqoomrwMdFG1e0kqvASYfnlb0lp8M5o5Fw2OFq1hNZxxcNk8Ik0Xm7LxzBhuidnZB/UtBqVCgUz3kBOP51Q==
 
+es-module-lexer@^0.10.0:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/es-module-lexer/-/es-module-lexer-0.10.4.tgz#334a61489b982fd8b535ba6ef8eb357fdc3990fe"
+  integrity sha512-n5bOGUnrmuCKyMkmHNtC1ObnUx8AgFcKWe2mbxb6jYzuK81W0Rk3Z//sCoGJuxWzos8R2w48TemGIFqZsTY6YA==
+
 esbuild-android-64@0.14.25:
   version "0.14.25"
   resolved "https://registry.yarnpkg.com/esbuild-android-64/-/esbuild-android-64-0.14.25.tgz#d532d38cb5fe0ae45167ce35f4bbc784c636be40"
@@ -884,6 +889,13 @@ magic-string@^0.25.7:
   dependencies:
     sourcemap-codec "^1.4.8"
 
+magic-string@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.26.1.tgz#ba9b651354fa9512474199acecf9c6dbe93f97fd"
+  integrity sha512-ndThHmvgtieXe8J/VGPjG+Apu7v7ItcD5mhEIvOscWjPF/ccOiLxHaSuCAS2G+3x4GKsAbT8u7zdyamupui8Tg==
+  dependencies:
+    sourcemap-codec "^1.4.8"
+
 memoize-one@^6.0.0:
   version "6.0.0"
   resolved "https://registry.npmjs.org/memoize-one/-/memoize-one-6.0.0.tgz"
@@ -1233,6 +1245,16 @@ unplugin-auto-import@^0.6.1:
     resolve "^1.22.0"
     unplugin "^0.3.2"
 
+unplugin-element-plus@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/unplugin-element-plus/-/unplugin-element-plus-0.3.2.tgz#3efd2dcbd678fcc25fdd4105708d93d347f5042f"
+  integrity sha512-/oPbLA1ByrZ3VvN3jrVtVZcGJ147+ccyrL1w9d8wNLTTMH+buxdtiMQQv9R7Muz22ocJvebXZzlRVlA/JeeVPA==
+  dependencies:
+    "@rollup/pluginutils" "^4.1.2"
+    es-module-lexer "^0.10.0"
+    magic-string "^0.26.1"
+    unplugin "^0.3.3"
+
 unplugin-vue-components@^0.17.21:
   version "0.17.21"
   resolved "https://registry.npmjs.org/unplugin-vue-components/-/unplugin-vue-components-0.17.21.tgz"
@@ -1249,7 +1271,7 @@ unplugin-vue-components@^0.17.21:
     resolve "^1.21.0"
     unplugin "^0.3.0"
 
-unplugin@^0.3.0, unplugin@^0.3.2:
+unplugin@^0.3.0, unplugin@^0.3.2, unplugin@^0.3.3:
   version "0.3.3"
   resolved "https://registry.npmjs.org/unplugin/-/unplugin-0.3.3.tgz"
   integrity sha512-WjZWpUqqcYPQ/efR00Zm2m1+J1LitwoZ4uhHV4VdZ+IpW0Nh/qnDYtVf+nLhozXdGxslMPecOshVR7NiWFl4gA==
