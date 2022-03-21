@@ -8,6 +8,10 @@ trigger:
     include:
       - prod
 
+variables:
+  containerName: blogapp
+  imageName: memoyu/blogapp
+
 pool:
   vmImage: ubuntu-latest
 
@@ -28,7 +32,7 @@ steps:
   displayName: 'npm install and build'
   
 - task: CopyFiles@2
-  displayName: 'Copy scripts to dist'
+  displayName: 'copy scripts to dist'
   inputs:
     Contents: |
       docker/Dockerfile
@@ -40,25 +44,47 @@ steps:
   displayName: 'build docker image and push'
   inputs:
     containerRegistry: 'memoyu-docker'
-    repository: 'memoyu/blogapp'
+    repository: $(imageName)
     command: 'buildAndPush'
     Dockerfile: 'src/dist/Dockerfile'
     tags: 'latest'
 
 - task: SSH@0
-  displayName: 'run blog api container'
+  displayName: 'run blog app container'
   inputs:
     sshEndpoint: 'HuaweiCloud'
     runOptions: 'inline'
     inline: |
       echo "================= to del container ===================="
-      docker kill blogapp
-      docker rm blogapp
+      # 判断是否存在容器
+      docker ps | grep $(containerName) &> /dev/null
+      # 如果不存在，则Remove
+      if [ $? -ne 0 ]
+      then
+          echo "$(containerName) container not exist continue.. "
+      else
+          echo "remove $(containerName) container"
+          docker kill $(containerName)
+          docker rm $(containerName)
+      fi
+
       echo "================= to rm image ===================="
-      docker rmi memoyu/blogapp
+      # 判断是否存在镜像
+      docker images | grep $(imageName) &> /dev/null
+      # 如果不存在，不做操作
+      if [ $? -ne 0 ]
+      then
+          echo "image does not exist , continue..."
+      else
+          echo "image exists !!! remove it"
+          docker rmi $(imageName)
+      fi
+
       echo "================= to pull image ===================="
-      docker pull memoyu/blogapp
+      docker pull $(imageName)
+
       echo "================= to run container ===================="
-      docker run --name blogapp -d -p 9002:80 memoyu/blogapp
+      docker run --name $(containerName) -d -p 9002:80 $(imageName)
+
       echo "================= publish success ===================="
     readyTimeout: '20000'
