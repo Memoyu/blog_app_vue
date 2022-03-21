@@ -5,6 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { visualizer } from "rollup-plugin-visualizer";
+import ElementPlus from 'unplugin-element-plus/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -34,6 +35,9 @@ export default defineConfig({
       resolvers: [ElementPlusResolver({
         importStyle: "sass"
       })],
+    }),
+    ElementPlus({
+      useSource: true,
     }),
     visualizer({
       open: true,
