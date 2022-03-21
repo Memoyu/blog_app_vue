@@ -4,9 +4,9 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-  tags:
+  tags: 
     include:
-      - prod
+      - release-*
 
 variables:
   containerName: blogapp
