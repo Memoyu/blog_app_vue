@@ -1,0 +1,98 @@
+# Node.js with Vue
+# Build a Node.js project that uses Vue.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+# 此处触发条件为当推送标签为release-*时触发
+trigger:
+  tags: 
+    include:
+      - release-* # *代表通配符，例如：release-20210321 可以触发
+
+# 定义变量，使用：$(变量名)，例如：$(containerName)
+variables:
+  containerName: blogapp
+  imageName: memoyu/blogapp
+
+pool:
+  vmImage: ubuntu-latest
+
+# 定义作业步骤，其内部是顺序运行
+steps:
+
+# 安装Node.js环境，此处因为项目为Vue3，所以使用v16.x版本的
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.x'
+  displayName: 'Install Node.js'
+
+# 初始化、build Vue 项目
+- script: |
+    echo ==================to build project==================
+    cd src
+    yarn
+    yarn run build
+    echo ==================completed build==================
+  displayName: 'npm install and build'
+
+# 将Dockerfile、Nginx.conf文件拷贝到dist文件夹根目录下，用于构建项目
+- task: CopyFiles@2
+  displayName: 'copy scripts to dist'
+  inputs:
+    Contents: |
+      docker/Dockerfile
+      conf/nginx.conf
+    TargetFolder: 'src/dist'
+    flattenFolders: true # 展开拷贝的文件，这样不会将拷贝文件的所处文件夹都同步到目标文件夹下，默认为false；
+    # 例如：docker/Dockerfile 为false时，拷贝后为dist/docker/Dockerfile；为true时，拷贝后为dist/Dockerfile；
+
+# 步骤2：构建Docker Image，完成后推送到Docker Hub
+- task: Docker@2
+  displayName: 'build docker image and push'
+  inputs:
+    containerRegistry: 'memoyu-docker'
+    repository: $(imageName)
+    command: 'buildAndPush'
+    Dockerfile: 'src/dist/Dockerfile' # 注意填写正确的Dockerfile地址
+    tags: 'latest'
+
+# 步骤3：连接服务SSH，进行旧容器、镜像删除，然后拉取新镜像并运行镜像
+- task: SSH@0
+  displayName: 'run blog app container'
+  inputs:
+    sshEndpoint: 'HuaweiCloud'
+    runOptions: 'inline'
+    inline: |
+      echo "================= to del container ===================="
+      # 判断是否存在容器
+      docker ps | grep $(containerName) &> /dev/null
+      # 如果不存在，则Remove
+      if [ $? -ne 0 ]
+      then
+          echo "$(containerName) container not exist continue.. "
+      else
+          echo "remove $(containerName) container"
+          docker kill $(containerName)
+          docker rm $(containerName)
+      fi
+
+      echo "================= to rm image ===================="
+      # 判断是否存在镜像
+      docker images | grep $(imageName) &> /dev/null
+      # 如果不存在，不做操作
+      if [ $? -ne 0 ]
+      then
+          echo "image does not exist , continue..."
+      else
+          echo "image exists !!! remove it"
+          docker rmi $(imageName)
+      fi
+
+      echo "================= to pull image ===================="
+      docker pull $(imageName)
+
+      echo "================= to run container ===================="
+      docker run --name $(containerName) -d -p 9002:80 $(imageName)
+
+      echo "================= publish success ===================="
+    readyTimeout: '20000'
